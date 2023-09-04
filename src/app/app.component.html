@@ -1,0 +1,25 @@
+<!-- <app-item-card [item$]="['currentItem','']"></app-item-card> -->
+<div class="itemCard">
+  <div class="itemCardHeader">
+    <div>
+      <h1>{{collection.value}}</h1>
+      <input (keyup)="1" type="text" #collection>
+    </div>
+  </div>
+  <app-item-card *ngFor="let x of item$|async" [item]="x"></app-item-card>
+</div>
+<!-- <div class="itemCard" *ngFor="let x of item$|async">
+  <div class="itemCardHeader">
+    <div>{{x.name}}</div>
+  </div>
+  <div class="itemCardBody">
+    <div class=""> {{x.name}} </div>
+    <div class="itemCardKeytValue" *ngFor="let y of x |keyvalue">
+      <div>
+        {{y.key}}
+      </div>
+      <div>
+        {{y.value}}
+      </div>
+    </div>
+  </div> -->
