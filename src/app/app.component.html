@@ -1,10 +1,25 @@
-<!-- <app-item-card [item$]="['currentItem','']"></app-item-card> -->
+<div class="itemCard" *ngIf="this.authS.user$ |async as user">
+  <div class="itemCardHeader">
+    {{user.displayName}}
+    <div class="itemCardHeaderControlBar">
+      <button (click)="this.authS.googleSignin()">GoogleLogin</button>
+      <button (click)="this.authS.googleSignout()">GoogleLogOut</button>
+    </div>
+  </div>
+  <img src="{{user.photoURL}}">
+  <p>
+    {{user.email}}
+  </p>
+</div>
+
 <div class="itemCard">
   <div class="itemCardHeader">
     <div>
-      <h1>{{collection.value}}</h1>
-      <input (keyup)="1" type="text" #collection>
+      <h1>:{{collection.value}}</h1>
+      <input (keyup)="1" type="text" value="{{address}}" #collection>
+      <button (click)="login()">login</button>
     </div>
+    <button (click)="createEmpty()">createEmpty</button>
   </div>
   <app-item-card *ngFor="let x of item$|async" [item]="x"></app-item-card>
 </div>

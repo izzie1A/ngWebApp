@@ -1,44 +1,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <div class="itemCard">
     <div class="itemCardHeader">
-        <div class="itemCardTitle">{{item.name}}</div>
+        <div class="itemCardTitle">
+            {{item.name}}
+            id:{{item.id}}
+        </div>
         <div class="itemCardHeaderControlBar">
-            <button (click)="1" class="button-23">
-                <span class="material-symbols-outlined">minimize</span>
-            </button>
-            <button (click)="1" class="button-23">
+            <div></div>
+            <div></div>
+            <button (click)="editmodeClick()" class="button-23" *ngIf="editmode==false">
                 <span class="material-symbols-outlined">edit</span>
             </button>
-            <button (click)="1" class="button-23">
+
+            <button (click)="this.firebaseS.createDoc('test',item.id,
+            this.item)" class="button-23" *ngIf="editmode!=false">
+                <span class="material-symbols-outlined">save</span>
+            </button>
+            <button (click)="this.firebaseS.deleteDoc('test',item.id)" class="button-23" *ngIf="editmode!=false">
                 <span class="material-symbols-outlined">delete</span>
+            </button>
+            <button (click)="editmodeClick()" class="button-23" *ngIf="editmode!=false">
+                <span class="material-symbols-outlined">close</span>
             </button>
         </div>
     </div>
+
+    <div class="itemSholder">
+
+    </div>
+
     <div class="itemCardBody">
+        <div class="itemCardImageContainer">
+            <div class="itemCardImagePanel">
+                <p>image</p>
+                <input class="fileInput" type="file" (change)="onFileSelected($event, item, 'imageArray')">s
+            </div>
+            <div class="itemCardImageFrameList">
+                <div *ngFor="let x of item.imageArray" class="itemImageFrame">
+                    <button class="itemImageDeleteButton" (click)="1">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    <img class="itemCardImage" src="{{x}}" #logo>
+                </div>
+            </div>
+        </div>
+
+        <button (click)="localAddField(item,' ','')" class="button-23" *ngIf="1">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+
+
         <div class="itemCardKeytValue" *ngFor="let y of item |keyvalue">
-            <div>
-                {{y.key}}
-            </div>
-            <div>
-                {{y.value}}
-            </div>
+            <div *ngIf="editmode==false">{{y.key}}</div>
+            <input *ngIf="editmode!=false" (keyup.enter)="localChangeField(y,y.key,itemKey.value)"
+                (blur)="localChangeField(y,y.key,itemKey.value)" type="text" value="{{y.key}}" #itemKey>
+
+            <div *ngIf="editmode==false">{{y.value}}</div>
+            <input *ngIf="editmode!=false" (keyup.enter)="localAddField(y,y.key,itemValue.value)"
+                (blur)="localAddField(y,y.key,itemValue.value)" type="text" value="{{y.value}}" #itemValue>
         </div>
     </div>
 </div>
-<!-- 
-<div class="itemCard" *ngFor="let x of item$">
-    <div class="itemCardHeader">
-        <div>{{x.name}}</div>
-    </div>
-    <div class="itemCardBody">
-        <div class=""> {{x.name}} </div>
-        <div class="itemCardKeytValue" *ngFor="let y of x |keyvalue">
-            <div>
-                {{y.key}}
-            </div>
-            <div>
-                {{y.value}}
-            </div>
-        </div>
-    </div>
-</div> -->

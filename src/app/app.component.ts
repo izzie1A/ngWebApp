@@ -4,6 +4,7 @@ import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { doc, setDoc } from "firebase/firestore";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -12,24 +13,35 @@ import { doc, setDoc } from "firebase/firestore";
 })
 export class AppComponent {
   item$: Observable<any[]>;
+  user$: Observable<any>|undefined;
   firestore: Firestore = inject(Firestore);
   title = 'ngWebApp';
+  address = 'test';
 
-  constructor() {
-    const itemCollection = collection(this.firestore, 'test');
+  constructor(public authS:AuthService,) {
+    const itemCollection = collection(this.firestore,this.address);
     this.item$ = collectionData(itemCollection);
-    
-    this.t('undefinded', 'undefined','');
+  }
+  
+  createEmpty(){
+    setDoc(doc(this.firestore, this.address, 'undefinded'), {
+      id:'undefinded',
+      name:'undefinded',
+      imageArray:[0,0],
+    });
   }
 
-  async tSetDoc(address:string,id:string,content:any){
-    await setDoc(doc(this.firestore, address, id),content);
+  login(){
+    this.authS.googleSignin();
+  }
+
+  async tSetDoc(address: string, id: string, content: any) {
+    await setDoc(doc(this.firestore, address, id), content);
   }
 
 
-  async t(address:string,id:string,content:any) {
+  async t(address: string, id: string, content: any) {
     let x = new tItem('undefinded', 'undefined');
-
     const tItemConverter = {
       toFirestore: (tItem: tItem) => {
         // :any potential threth
@@ -44,20 +56,14 @@ export class AppComponent {
         return new tItem(data.name, data.id);
       }
     }
-
-    const ref = doc(this.firestore, "test",  "USS").withConverter(tItemConverter);
-    await setDoc(ref,x);
+    const ref = doc(this.firestore, "test", "USS").withConverter(tItemConverter);
+    await setDoc(ref, x);
   }
 }
 
 interface tFile {
   name: string;
   id: string;
-}
-
-interface ui {
-  expand:boolean;
-  editMode:boolean;
 }
 class tItem implements tFile {
   name: string;
