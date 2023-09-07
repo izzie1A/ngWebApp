@@ -3,61 +3,78 @@
     <div class="itemCardHeader">
         <div class="itemCardTitle">
             {{item.name}}
-            id:{{item.id}}
         </div>
         <div class="itemCardHeaderControlBar">
             <div></div>
             <div></div>
-            <button (click)="editmodeClick()" class="button-23" *ngIf="editmode==false">
+            <button (click)="editmodeClick(itemSholderDiv)" class="button-23" *ngIf="editmode==false">
                 <span class="material-symbols-outlined">edit</span>
             </button>
 
-            <button (click)="this.firebaseS.createDoc('test',item.id,
-            this.item)" class="button-23" *ngIf="editmode!=false">
+            <button (click)="this.firebaseS.createDoc('test',item.id,this.item)" class="button-23"
+                *ngIf="editmode!=false">
                 <span class="material-symbols-outlined">save</span>
             </button>
             <button (click)="this.firebaseS.deleteDoc('test',item.id)" class="button-23" *ngIf="editmode!=false">
                 <span class="material-symbols-outlined">delete</span>
             </button>
-            <button (click)="editmodeClick()" class="button-23" *ngIf="editmode!=false">
+            <button (click)="editmodeClick(itemSholderDiv)" class="button-23" *ngIf="editmode!=false">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
     </div>
 
-    <div class="itemSholder">
-
+    <div class="itemSholder" #itemSholderDiv>
     </div>
 
     <div class="itemCardBody">
+        <!-- image -->
         <div class="itemCardImageContainer">
             <div class="itemCardImagePanel">
-                <p>image</p>
-                <input class="fileInput" type="file" (change)="onFileSelected($event, item, 'imageArray')">s
+                <input class="fileInput" type="file" (change)="onFilePush($event, item, 'imageArray')">
             </div>
-            <div class="itemCardImageFrameList">
-                <div *ngFor="let x of item.imageArray" class="itemImageFrame">
-                    <button class="itemImageDeleteButton" (click)="1">
-                        <span class="material-symbols-outlined">close</span>
-                    </button>
+
+            <div class="itemCardImageFrameList ">
+                <div *ngFor="let x of item.imageArray ; let i = index" class="itemImageFrame">
+                    <div class="itemCardImageEditPanel">
+                        <button class="material-symbols-outlined upload-btn-wrapper itemImageButton">
+                            Upload
+                            <input class="fileInput" type="file" (change)="onFileEdit($event,item,'imageArray',i)">
+                        </button>
+                        <button class="material-symbols-outlined itemImageButton"
+                            (click)="onFileDelete($event,item,'imageArray',i)">delete</button>
+                        <button class="material-symbols-outlined itemImageButton"
+                            (click)="onFileClear($event,item,'imageArray',i)">cancel</button>
+                    </div>
                     <img class="itemCardImage" src="{{x}}" #logo>
                 </div>
             </div>
         </div>
-
-        <button (click)="localAddField(item,' ','')" class="button-23" *ngIf="1">
-            <span class="material-symbols-outlined">add</span>
-        </button>
-
-
-        <div class="itemCardKeytValue" *ngFor="let y of item |keyvalue">
+        <!-- image -->
+        <!-- keyValue -->
+        <div class="itemCardKeytValue" *ngIf="editmode!=false">
+            <p>Add field</p>
+            <button (click)="localAddField(item,'undefinded','')" class="button-23" *ngIf="1">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+        </div>
+        <div class="itemCardKeytValue" *ngFor="let y of item |keyvalue; let i = index">
             <div *ngIf="editmode==false">{{y.key}}</div>
-            <input *ngIf="editmode!=false" (keyup.enter)="localChangeField(y,y.key,itemKey.value)"
-                (blur)="localChangeField(y,y.key,itemKey.value)" type="text" value="{{y.key}}" #itemKey>
-
             <div *ngIf="editmode==false">{{y.value}}</div>
-            <input *ngIf="editmode!=false" (keyup.enter)="localAddField(y,y.key,itemValue.value)"
+
+            <div *ngIf="editmode!=false && y.key=='id'">{{y.key}}</div>
+
+            <div *ngIf="y.key!='id' && editmode!=false" class="temCardValue">
+                <button class="material-symbols-outlined itemImageButton"
+                    (click)="localDeleteField(y,y.key,itemKey.value)">
+                    delete
+                </button>
+                <input (keyup.enter)="localChangeField(y,y.key,itemKey.value)"
+                    (blur)="localChangeField(y,y.key,itemKey.value)" type="text" value="{{y.key}}" #itemKey>
+            </div>
+            <input *ngIf="editmode!=false " (keyup.enter)="localAddField(y,y.key,itemValue.value)"
                 (blur)="localAddField(y,y.key,itemValue.value)" type="text" value="{{y.value}}" #itemValue>
         </div>
+        <!-- keyValue -->
     </div>
 </div>

@@ -14,29 +14,23 @@ export class ItemCardComponent {
   editmode: boolean = false;
   saved: boolean = false;
 
+  backupItem:any;
+
 
   constructor(public firebaseS: FirebaseControlService) {
-
+    this.backupItem=this.item;
   }
 
-  editmodeClick() {
-    this.editmode ? this.editmode = false : this.editmode = true;
+  editmodeClick(sholderRef: any) {
+    if (this.editmode==true) {
+      this.editmode = false
+      sholderRef.style.backgroundColor = 'var(--green)';
+    } else if (this.editmode==false) {
+      this.editmode = true
+      sholderRef.style.backgroundColor = 'var(--yellow)';
+    }
   }
 
-  // loaclItemedit(ref: any, key: any, value: any) {
-  //   console.log(ref);
-  //   console.log(value);
-  //   switch (key) {
-  //     case 'id':
-  //       ref.id = value;
-  //       this.item.id = value;
-  //       break;
-  //     case 'name':
-  //       ref.name = value;
-  //       this.item.name = value;
-  //       break;
-  //   }
-  // }
 
   localAddField(ref: any, key: any, value: any) {
     this.item[key] = value;
@@ -52,21 +46,38 @@ export class ItemCardComponent {
     console.log(this.item[key]);
   }
 
-
   onFileSelected(event: any, ref: any, key: any) {
+  }
+  onFilePush(event: any, ref: any, key: any) {
     const file: File = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (event) => {
-        ref[key].push(event.target?.result) ;
+        ref[key].push(event.target?.result);
       };
     }
   }
-  onFileEdit(event: any, ref: any, key: any){
-
+  onFileEdit(event: any, ref: any, key: any, index: number) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        this.item[key][index] = event.target?.result;
+      };
+    }
   }
-  onFileDelete(event: any, ref: any, key: any){
-
+  onFileDelete(event: any, ref: any, key: any, index: number) {
+    console.log(event, ref, key, index)
+    console.log(ref[key])
+    this.item[key].splice(index, 1)
+    console.log(ref[key])
+  }
+  onFileClear(event: any, ref: any, key: any, index: number) {
+    console.log(event, ref, key, index)
+    console.log(ref[key])
+    this.item[key][index] = null
+    console.log(ref[key])
   }
 }

@@ -1,3 +1,16 @@
+:root {
+  --blue: #389cff;
+  --red:rgb(255, 61, 61);
+  --red:#DA2C38;
+  --yellow:#FCFF4B;
+  --green:#88B25B;
+  --white: #ffffff;
+  --lightBlue:#8DA9C4;
+
+  --main:#2C7FDD;
+  --sub:#619FE5;
+}
+
 .itemCard {
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
@@ -7,7 +20,7 @@
 }
 
 .itemCardHeader {
-  background-color: rgb(255, 61, 61);
+  background-color: var(--main);
   color: white;
   padding: 1%;
   display: grid;
@@ -16,26 +29,29 @@
 .itemCardHeaderControlBar {
   display: flex;
   justify-content: space-evenly;
+  padding: 1%;
 }
 
 .itemSholder {
   background-color: rgb(255, 206, 61);
+  background-color: var(--sub);
   min-height: 1vh;
   padding: 1%;
+  color: var(--white);
 }
 
 .itemCardImageFrameList {
-    display: grid;
-    grid-template-rows: 50% 50%;
-    grid-template-columns: 40% 40%;
-    overflow-x: scroll;
+    display: flex;
+    overflow-y: scroll;
     padding: 1%;
 }
 .itemImageFrame {
   position: relative; 
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-  width: 20vw;
-  height: 20vw;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px; */
+  min-width: 20vw;
+  min-height: 20vw;
+  width: 20%;
+  height: 20%;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -48,16 +64,42 @@
 }
 .itemCardImagePanel {
   width: 100%;
-  /* position: absolute; */
+  overflow: hidden
+  ;
+  /* position: relative; */
+}
+.itemCardImageEditPanel{
+  position:absolute;
+  bottom:5%;
+  right:5%;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 .itemCardImageContainer {
   display: grid;
   grid-template-columns: 31% 69%;
 }
+.itemImageButton{
+  font-size:3vw !important;
+  border-radius: 5px;
+  margin:1%;
+  z-index:1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .itemCardTitle {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+.temCardValue {
+  display: flex;
+  justify-content: flex-start;
 }
 .itemCardKeytValue {
   display: grid;
@@ -71,7 +113,21 @@
   height: 10vw;
 }
 
-/* CSS */
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.upload-btn-wrapper input[type=file] {
+  /* font-size: 100px; */
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+/* CSS button */
 .button-23 {
   border: 1px solid #222222;
   background-color: #ffffff;

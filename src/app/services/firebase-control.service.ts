@@ -10,7 +10,7 @@ export class FirebaseControlService {
   constructor() { }
 
   async createDoc(address: string, id: string, content: any) {
-    console.log(content)
+    console.log('created',content)
     return await setDoc(doc(this.firestore, address, id), content);
   }
   async readDoc(address: string, id: string) {

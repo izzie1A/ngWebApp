@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -12,9 +12,11 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  item$: Observable<any[]>;
-  user$: Observable<any>|undefined;
   firestore: Firestore = inject(Firestore);
+  
+  user$: Observable<any>|undefined;
+  item$: Observable<any[]>;
+  
   title = 'ngWebApp';
   address = 'test';
 
@@ -27,7 +29,7 @@ export class AppComponent {
     setDoc(doc(this.firestore, this.address, 'undefinded'), {
       id:'undefinded',
       name:'undefinded',
-      imageArray:[0,0],
+      imageArray:[0],
     });
   }
 

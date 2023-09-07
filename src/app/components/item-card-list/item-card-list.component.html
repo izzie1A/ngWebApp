@@ -1,0 +1,11 @@
+<div class="itemCard">
+  <div class="itemCardHeader">
+    <div>
+      <h1>:{{collection.value}}</h1>
+      <input (keyup)="1" type="text" value="{{address}}" #collection>
+      <button (click)="1">login</button>
+    </div>
+    <button (click)="createEmpty()">createEmpty</button>
+  </div>
+  <app-item-card *ngFor="let item of item$|async" [item]="item"></app-item-card>
+</div>
