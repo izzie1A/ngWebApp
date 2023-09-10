@@ -11,6 +11,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemCardListComponent } from './components/item-card-list/item-card-list.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { ItemCardListComponent } from './components/item-card-list/item-card-lis
     AppComponent,
     ItemCardComponent,
     ItemCardListComponent,
+    NavBarComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,

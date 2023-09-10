@@ -20,8 +20,15 @@ export class ItemCardListComponent {
     const itemCollection = collection(this.firestore,this.address);
     this.item$ = collectionData(itemCollection);
   }
+  
   createEmpty(){
     let x = new tItem('undefinded','undefinded');
     this.fbS.createDoc(this.address,x.id,x);
+  }
+  
+  switchCollection(address:string){
+    this.address = address;
+    const itemCollection = collection(this.firestore,this.address);
+    this.item$ = collectionData(itemCollection);
   }
 }

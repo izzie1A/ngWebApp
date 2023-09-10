@@ -6,8 +6,7 @@
         </div>
         <div class="itemCardHeaderControlBar">
             <div></div>
-            <div></div>
-            <button (click)="editmodeClick(itemSholderDiv)" class="button-23" *ngIf="editmode==false">
+            <button (click)="itemCardControl(itemSholderDiv,'edit')" class="button-23" *ngIf="editmode==false">
                 <span class="material-symbols-outlined">edit</span>
             </button>
 
@@ -18,7 +17,7 @@
             <button (click)="this.firebaseS.deleteDoc('test',item.id)" class="button-23" *ngIf="editmode!=false">
                 <span class="material-symbols-outlined">delete</span>
             </button>
-            <button (click)="editmodeClick(itemSholderDiv)" class="button-23" *ngIf="editmode!=false">
+            <button (click)="itemCardControl(itemSholderDiv,'close')" class="button-23" *ngIf="editmode!=false">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>

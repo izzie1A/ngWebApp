@@ -1,30 +1,3 @@
-<button (click)="login()">login</button>
-
-<div class="itemCard" *ngIf="this.authS.user$ |async as user">
-  <div class="itemCardHeader">
-    {{user.displayName}}
-    <div class="itemCardHeaderControlBar">
-      <button (click)="this.authS.googleSignin()">GoogleLogin</button>
-      <button (click)="this.authS.googleSignout()">GoogleLogOut</button>
-    </div>
-  </div>
-  <img src="{{user.photoURL}}">
-  <p>
-    {{user.email}}
-  </p>
-</div>
-
-<app-item-card-list [address]="'test'"></app-item-card-list>
-
-<!-- <div class="itemCard">
-  <div class="itemCardHeader">
-    <div>
-      <h1>:{{collection.value}}</h1>
-      <input (keyup)="1" type="text" value="{{address}}" #collection>
-    </div>
-    <button (click)="createEmpty()">createEmpty</button>
-  </div>
-  <app-item-card *ngFor="let item of item$|async" [item]="item"></app-item-card>
-</div> -->
-
+<app-item-card-list></app-item-card-list>
+<app-nav-bar></app-nav-bar>
 <!-- <div *ngFor="let item of item$|async">{{item}}</div> -->

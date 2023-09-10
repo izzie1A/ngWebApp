@@ -14,20 +14,36 @@ export class ItemCardComponent {
   editmode: boolean = false;
   saved: boolean = false;
 
-  backupItem:any;
+  backupItem: any;
 
 
   constructor(public firebaseS: FirebaseControlService) {
-    this.backupItem=this.item;
+    this.backupItem = this.item;
   }
 
   editmodeClick(sholderRef: any) {
-    if (this.editmode==true) {
+    if (this.editmode == true) {
       this.editmode = false
       sholderRef.style.backgroundColor = 'var(--green)';
-    } else if (this.editmode==false) {
+    } else if (this.editmode == false) {
       this.editmode = true
       sholderRef.style.backgroundColor = 'var(--yellow)';
+    }
+  }
+  itemCardControl(sholderRef: any, command: string) {
+    switch (command) {
+      case 'save':
+        this.editmode = false
+        sholderRef.style.backgroundColor = 'var(--green)';
+        break;
+        case 'close':
+        this.editmode = false
+        sholderRef.style.backgroundColor = 'var(--yellow)';
+        break;
+        case 'edit':
+        this.editmode? this.editmode = false : this.editmode = true;
+        sholderRef.style.backgroundColor = 'var(--yellow)';
+        break;
     }
   }
 
@@ -47,6 +63,7 @@ export class ItemCardComponent {
   }
 
   onFileSelected(event: any, ref: any, key: any) {
+
   }
   onFilePush(event: any, ref: any, key: any) {
     const file: File = event.target.files[0];
