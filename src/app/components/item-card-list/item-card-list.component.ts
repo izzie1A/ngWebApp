@@ -2,7 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from "src/app/services/auth.service";
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { FirebaseControlService,tItem } from "src/app/services/firebase-control.service";
+import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
 
 @Component({
   selector: 'app-item-card-list',
@@ -10,25 +10,42 @@ import { FirebaseControlService,tItem } from "src/app/services/firebase-control.
   styleUrls: ['./item-card-list.component.css']
 })
 export class ItemCardListComponent {
-  @Input() address:string = 'undefinded';
-  @Input() collection:any;
-  
+  @Input() address: string = 'undefinded';
+  @Input() collection: any;
+
   firestore: Firestore = inject(Firestore);
   item$: Observable<any[]> | undefined;
-  constructor(private fbS:FirebaseControlService) {
-    this.address='test'
-    const itemCollection = collection(this.firestore,this.address);
-    this.item$ = collectionData(itemCollection);
+  collectionArray: any[] = [
+    'test',
+  ];
+  constructor(private fbS: FirebaseControlService) {
+    this.address = 'test'
+    this.item$ = collectionData(collection(this.firestore, this.address));
+
+    this.fbS.deleteDoc(this.address, '0Undefinded').then((a) => {
+      this.createEmpty();
+    }
+    );
+
   }
-  
-  createEmpty(){
-    let x = new tItem('undefinded','undefinded');
-    this.fbS.createDoc(this.address,x.id,x);
+
+  createEmpty() {
+    let x = new tItem('undefinded', 'undefinded');
+    let imgUrl = 'https://picsum.photos/200/300'
+    let emptyObj = {
+      name: '0Undefinded',
+      description: '0Undefindeddddddddddddddddddddddddddd',
+      createTime: Date.now(),
+      id: '0Undefinded',
+      fileArray: [],
+      imageArray: [imgUrl,imgUrl,imgUrl],
+    }
+    this.fbS.createDoc(this.address, emptyObj.id, emptyObj);
   }
-  
-  switchCollection(address:string){
+
+  switchCollection(address: string) {
     this.address = address;
-    const itemCollection = collection(this.firestore,this.address);
+    const itemCollection = collection(this.firestore, this.address);
     this.item$ = collectionData(itemCollection);
   }
 }

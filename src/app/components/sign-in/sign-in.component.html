@@ -1,18 +1,17 @@
-<p>sign-in works!</p>
-<div>
-    <button (click)="login()">login</button>
-</div>
 <div class="itemCard" *ngIf="this.authS.user$ |async as user">
     <div class="itemCardHeader">
-        {{user.displayName}}
+        <a>
+            {{user.displayName}}
+        </a>
         <div class="itemCardHeaderControlBar">
             <button (click)="this.authS.googleSignin()">GoogleLogin</button>
             <button (click)="this.authS.googleSignout()">GoogleLogOut</button>
         </div>
     </div>
-    <div class=""></div>
-    <img src="{{user.photoURL}}">
-    <p>
-        {{user.email}}
-    </p>
+    <div class="itemSholder">
+        <a>{{user.email}}</a>
+    </div>
+    <div class="itemCardBody">
+        <img src="{{user.photoURL}}">
+    </div>
 </div>

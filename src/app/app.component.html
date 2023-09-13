@@ -1,3 +1,12 @@
-<app-item-card-list></app-item-card-list>
+<div class="appContainer">
+    <app-item-card-list [address]="'/test'"></app-item-card-list>
+</div>
+<router-outlet></router-outlet>
 <app-nav-bar></app-nav-bar>
 <!-- <div *ngFor="let item of item$|async">{{item}}</div> -->
+<style>
+    .appContainer{
+        background-color: var(--seaSick);
+        padding: 1%;
+    }
+</style>

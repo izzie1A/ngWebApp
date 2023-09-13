@@ -9,13 +9,13 @@ import { FirebaseControlService } from "src/app/services/firebase-control.servic
 })
 export class ItemCardComponent {
   @Input() item: any = undefined;
+
   @Input() item$: Observable<any[]> | undefined;
 
   editmode: boolean = false;
   saved: boolean = false;
 
   backupItem: any;
-
 
   constructor(public firebaseS: FirebaseControlService) {
     this.backupItem = this.item;
@@ -30,6 +30,11 @@ export class ItemCardComponent {
       sholderRef.style.backgroundColor = 'var(--yellow)';
     }
   }
+
+  itemCardMode(){
+
+  }
+
   itemCardControl(sholderRef: any, command: string) {
     switch (command) {
       case 'save':

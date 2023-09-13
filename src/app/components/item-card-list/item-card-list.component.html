@@ -1,12 +1,52 @@
 <div class="itemCard">
-  <div class="itemCardHeader">
-    <div>
-      <h1>:{{collection.value}}</h1>
-      <input (keyup)="1" type="text" value="{{address}}" #collection>
-      <button (click)="switchCollection(collection.value)">serach</button>
+  <div class="itemCardHeader flexAround">
+    <div class="">
+      <h3>:{{address.split("/").pop()}}</h3>
     </div>
-    <button class="button-23" (click)="createEmpty()">createEmpty</button>
+    <div class="itemCardControlBar">
+      <button class="material-symbols-outlined itemImageButton" (click)="createEmpty()"><span> create_new_folder</span>
+      </button>
+      <button class="material-symbols-outlined itemImageButton">
+        <span>close_fullscreen</span>
+      </button>
+      <button class="material-symbols-outlined itemImageButton">
+        <span>close</span>
+      </button>
+    </div>
   </div>
-  <div class="itemSholder"></div>
-  <app-item-card *ngFor="let item of item$|async" [item]="item"></app-item-card>
+
+  <div class="itemSholder flexAround">
+    <a>:{{address}}</a>
+    <select (change)="switchCollection(collectionOption.value)" #collectionOption>
+      <option value="">--Please choose an option--</option>
+      <option *ngFor="let collection of collectionArray" value="{{collection.address}}">
+        {{collection.displayName}}
+      </option>
+      <option value="test">test</option>
+    </select>
+  </div>
+
+  <div class="itemCardList">
+    <app-item-card *ngFor="let item of item$|async" [item]="item"></app-item-card>
+  </div>
 </div>
+
+<style>
+  .itemCardList {}
+
+  @media only screen and (min-width: 700px) {
+    .itemCardList {
+      display: grid;
+      grid-template-columns: 33% 33% 33% !important;
+      justify-content: space-evenly;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .itemCardList {
+      display: grid;
+      grid-template-columns: 20% 20% 20% 20% 20% !important;
+      justify-content: space-evenly;
+    }
+  }
+</style>
