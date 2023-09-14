@@ -51,11 +51,26 @@
     </div>
 </div>
 
+<!-- poster -->
+<div class="itemCard">
+    <div class="itemCardImagePoster">
+        <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+    </div>
+
+    <div class="itemCardSholder flexAround">
+        <a>{{item.name}}</a>
+    </div>
+    <div class=""> 
+        <a>{{item.description}}</a>
+    </div>
+
+</div>
 
 
 
 
-<div class="itemCard" *ngIf="editmode==true">
+
+<div class="itemCard" >
     <div class="itemCardHeader">
         <a>{{item$}}</a>
         <div>

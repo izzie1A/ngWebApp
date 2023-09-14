@@ -1,1 +1,44 @@
-<!-- <app-sign-in></app-sign-in> -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+<nav class="navBar">
+    <button (click)="self(navButton)" class="navBarButton hClick " routerLink="/{{movie.dir.toString()}}"
+        *ngFor="let movie of navbarGidContainer" #navButton>
+        <span class="material-symbols-outlined ">
+            {{movie.iconName}}
+        </span>
+    </button>
+</nav>
+
+
+<style>
+    .navBar {
+        display: flex;
+        background-color: var(--sub);
+        height: 7vh;
+        position: fixed;
+        width: 90%;
+        left: 5%;
+        bottom: 0;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        border-radius: 25px 25px 0px 0px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    }
+
+    .navBarButton {
+        background-color: var(--main);
+        color: var(--seaSick);
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        width: 20%;
+        overflow: hidden;
+        justify-content: center;
+    }
+
+
+    .hClick:focus {
+        color: var(--yellow);
+    }
+</style>

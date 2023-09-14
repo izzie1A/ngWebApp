@@ -1,12 +1,50 @@
+<div>
+    <button>asds</button>
+    <button>asds</button>
+    <button>asds</button>
+    <button>asds</button>
+    <button>asds</button>
+</div>
+
+    <button class="hClick">asds</button>
+    <button class="hClick">asds</button>
+    <button class="hClick">asds</button>
+    <button class="hClick">asds</button>
+    <button class="hClick">asds</button>
 <div class="appContainer">
     <app-item-card-list [address]="'/test'"></app-item-card-list>
 </div>
-<router-outlet></router-outlet>
-<app-nav-bar></app-nav-bar>
+<div>
+
+    <router-outlet></router-outlet>
+    <app-nav-bar></app-nav-bar>
+</div>
 <!-- <div *ngFor="let item of item$|async">{{item}}</div> -->
 <style>
     .appContainer{
         background-color: var(--seaSick);
         padding: 1%;
     }
+    .navBar {
+        display: flex;
+        background-color: var(--sub);
+        height: 7vh;
+        height: 10vh;
+        width: 100vw;
+        bottom: 0;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .navBarButton {
+        background-color: var(--main);
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        width: 20%;
+        overflow: hidden;
+        justify-content: center;
+    }
+
+
 </style>

@@ -2,7 +2,7 @@
   --blue: #389cff;
   /* --red: rgb(255, 61, 61); */
   --red: #da2c38;
-  --yellow: #fcff4b;
+  --yellow: #ffbf45;
   --green: #88b25b;
   --white: #ffffff;
   --lightBlue: #8da9c4;
@@ -156,6 +156,21 @@ body::-webkit-scrollbar-thumb {
   color: #dddddd;
   cursor: not-allowed;
   opacity: 1;
+}
+
+.hClick {
+  all: unset;
+  
+}
+.hClick:active {
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+.hClick:focus {
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  color: var(--yellow) ;
+}
+.hClick:hover {
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 /* 
