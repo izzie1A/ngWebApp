@@ -45,9 +45,16 @@ export class ItemCardComponent {
         break;
       case 'view':
         this.itemCardMode = 'view'
+        this.t();
         break;
     }
   }
+
+  t(){
+    console.log(this.item)
+    // this.firebaseS.docSave('/loreamFolder','',this.item)
+  }
+
 
   itemCardControl(sholderRef: any, command: string) {
     switch (command) {

@@ -16,13 +16,15 @@ export class ItemCardListComponent {
 
   firestore: Firestore = inject(Firestore);
   item$: Observable<any[]> | undefined;
-  collectionArray: any[] = [
-    'test',
-  ];
+  collectionArray: any[] = ['loreamFolder','test','cities'];
   constructor(private fbS: FirebaseControlService) {
-    this.address = 'test'
+    this.address = this.collectionArray[0]
     this.item$ = collectionData(collection(this.firestore, this.address));
-
+    let home = {displayName:'Home',address:'loreamFolder'}
+    let test = {displayName:'test',address:'test'}
+    let cities = {displayName:'cities',address:'cities'}
+    this.collectionArray = [home,test,cities];
+    
     this.fbS.deleteDoc(this.address, '0Undefinded').then((a) => {
       this.createEmpty();
     }

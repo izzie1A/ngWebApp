@@ -1,17 +1,86 @@
 <div class="itemCard" *ngIf="this.authS.user$ |async as user">
-    <div class="itemCardHeader">
-        <a>
-            {{user.displayName}}
-        </a>
+    <div class="itemCardHeader flexAround">
+        <a>{{user.displayName}}</a>
         <div class="itemCardHeaderControlBar">
-            <button (click)="this.authS.googleSignin()">GoogleLogin</button>
-            <button (click)="this.authS.googleSignout()">GoogleLogOut</button>
+            <button (click)="this.authS.signout()" class="flexAround">
+                <span class="material-symbols-outlined ">LogOut</span>
+                LogOut
+            </button>
         </div>
     </div>
-    <div class="itemSholder">
-        <a>{{user.email}}</a>
+    <div class="itemCardSholder">
     </div>
-    <div class="itemCardBody">
-        <img src="{{user.photoURL}}">
+
+    <div class="keyValue">
+        <div>
+            <img src={{user.photoURL}} id="userImage" alt="img">
+        </div>
+        <div>
+            <h6>Welcome :</h6>
+            <h6> {{user.displayName}}</h6>
+            <h6> {{user.emailVerified}}</h6>
+        </div>
+    </div>
+    <div class="itemCardBack">
+        asdasd
+    </div>
+</div>
+
+
+<!-- annominus -->
+<div class="itemCard" *ngIf="(this.authS.authState$ | async)==null">
+    <div class="itemCardHeader flexAround">
+        <a>Annominus</a>
+        <div class="itemCardHeaderControlBar" class="flexAround">
+        </div>
+    </div>
+    <div class="itemCardSholder">
+    </div>
+
+    <div class="flexList">
+        <div class="keyValue">
+            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
+                (click)="this.authS.googleSignin()">
+                <span class="material-symbols-outlined ">LogIn</span>
+            </button>
+            <a>Sign-In with Google</a>
+        </div>
+        <div class="keyValue">
+            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
+                (click)="this.authS.facebookSignin()">
+                <span class="material-symbols-outlined ">LogIn</span>
+            </button>
+            <a>Sign-In with Facebook</a>
+        </div>
+        <div class="keyValue">
+            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
+                (click)="this.authS.googleSignin()">
+                <span class="material-symbols-outlined ">LogIn</span>
+            </button>
+            <a>Sign-In with Google</a>
+        </div>
+        <div class="keyValue">
+            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
+                (click)="this.authS.googleSignin()">
+                <span class="material-symbols-outlined ">LogIn</span>
+            </button>
+            <a>Sign-In with Google</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="itemCardHeaderControlBar" *ngIf="this.authS.user$==null">
+    <button (click)="this.authS.googleSignin()">GoogleLogin</button>
+</div>
+
+<div class="page" id="loginpageContainer">
+    <div class="displayblock" *ngIf="(this.authS.authState$ | async) as user">
+        <div class="displayHeader">
+            <h6>{{user.displayName}}</h6>
+        </div>
+        <div class="displayBoard">
+            <h6>Welcome : {{user.email}}</h6>
+        </div>
     </div>
 </div>

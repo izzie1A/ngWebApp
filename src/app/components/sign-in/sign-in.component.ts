@@ -8,8 +8,15 @@ import { AuthService } from "src/app/services/auth.service";
 export class SignInComponent {
   
   constructor(public authS:AuthService) {
+    this.t();
   }
   login(){
     this.authS.googleSignin();
+  }
+  async t(){
+    await console.log(this.authS.authState$)
+    await console.log(this.authS.user$)
+    const user = this.authS.authState$;
+
   }
 }

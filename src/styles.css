@@ -55,12 +55,12 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-background-color: darkgrey;
-outline: 1px solid slategrey;
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 
 /* itemCard */
@@ -72,6 +72,7 @@ outline: 1px solid slategrey;
   overflow: hidden;
 
   animation-duration: 4s;
+  background-color: var(--seaSick);
 }
 
 
@@ -221,10 +222,10 @@ outline: 1px solid slategrey;
   grid-template-columns: 31% 69%;
   align-content: center;
   justify-content: space-around;
-  padding-left: 2%;
+  /* padding-left: 2%; */
 
-  box-shadow: rgb(51, 51, 51) 0px 0.125rem 3px 0px;
-  margin-bottom: 2%;
+  /* box-shadow: rgb(51, 51, 51) 0px 0.125rem 3px 0px; */
+  /* margin-bottom: 2%; */
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -244,7 +245,22 @@ outline: 1px solid slategrey;
   font-size: var(--keyValue);
 }
 
+.itemCardBack {
+  width: 100%;
+  min-height: 80px;
+  background-color: var(--seaSick);
+}
 
+.itemCardBack:before {
+  content: "";
+  position:absolute;
+  top:-40px;
+  left:0;
+  height:40px;
+  width: 40px;
+  border-bottom-left-radius: 50%;
+  background:#000;
+}
 
 /* file upload */
 .fileContext {
@@ -287,6 +303,11 @@ outline: 1px solid slategrey;
   padding-left: 5%;
   align-items: center;
   justify-content: space-between;
+}
+
+.flexList {
+  display: flex;
+  flex-direction: column;
 }
 
 .itemImageButton {

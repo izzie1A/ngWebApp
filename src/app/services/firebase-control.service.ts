@@ -11,9 +11,6 @@ export class FirebaseControlService {
   firestore: Firestore = inject(Firestore);
   private storage: Storage = inject(Storage);
   constructor() {
-    this.t();
-  }
-  async t() {
   }
 
   async docSave(address: string, id: string, content: any) {
