@@ -21,6 +21,7 @@ import { HomePageComponent } from './components/slides/home-page/home-page.compo
 import { SettingComponent } from './components/slides/setting/setting.component';
 import { FileControlComponent } from './components/slides/file-control/file-control.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { ItemCardViewerComponent } from './components/item-card-viewer/item-card-viewer.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     SettingComponent,
     FileControlComponent,
     ImageViewerComponent,
+    ItemCardViewerComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from "src/app/services/auth.service";
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
+import { faker } from '@faker-js/faker';
 
 @Component({
   selector: 'app-item-card-list',
@@ -32,8 +33,8 @@ export class ItemCardListComponent {
     let x = new tItem('undefinded', 'undefinded');
     let imgUrl = 'https://picsum.photos/200/300'
     let emptyObj = {
-      name: '0Undefinded',
-      description: '0Undefindeddddddddddddddddddddddddddd',
+      name: faker.commerce.product(),
+      description: faker.commerce.productDescription(),
       createTime: Date.now(),
       id: '0Undefinded',
       fileArray: [],

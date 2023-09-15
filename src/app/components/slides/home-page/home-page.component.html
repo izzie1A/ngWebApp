@@ -1,1 +1,14 @@
-<p>home-page works!</p>
+<!-- <app-item-card *ngFor="let x of item$|async" [item]="item$"></app-item-card> -->
+<div class="homePageScroller">
+    <app-item-card-viewer *ngFor="let x of item$|async" [item]="x"></app-item-card-viewer>
+</div>
+
+<style>
+    .homePageScroller {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+</style>

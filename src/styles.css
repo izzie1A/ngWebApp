@@ -34,9 +34,9 @@
 }
 @media only screen and (min-width: 1000px) {
   :root {
-    --title: 12px;
-    --context:6px;
-    --keyvalue: 3px;
+    --title: 24px;
+    --context:12px;
+    --keyvalue: 9px;
   }
 }
 
@@ -61,12 +61,15 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
+/* itemCard */
 .itemCard {
   position: relative;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   border-radius: 1vmin;
   margin: 5%;
   overflow: hidden;
+
+  animation-duration: 4s;
 }
 
 
@@ -89,7 +92,8 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--sub);
   padding: 2%;
   color: var(--white);
-  font-size: 0.5rem;
+  /* font-size: 0.5rem; */
+  font-size: var(--context);
 }
 
 .itemCardBody{
@@ -130,14 +134,7 @@ body::-webkit-scrollbar-thumb {
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
 
-.itemCardImagePoster {
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
+
 
 .itemImageFrameImage {
   width: 100%;
@@ -151,6 +148,18 @@ body::-webkit-scrollbar-thumb {
   justify-content: space-evenly;
   width: 30%;
   flex-direction: column;
+}
+.itemCardImagePosterFrame {
+  /* height: 120px; */
+  min-height: 120px;
+  max-height: 60vh;
+  min-width: 120px;
+  max-width: 90vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  overflow: hidden;
 }
 
 /* text style */
@@ -243,10 +252,6 @@ body::-webkit-scrollbar-thumb {
     height: 60px;
     width: 60px;
     border-radius: 5px;
-  }
-
-  .itemCardImageFrameList {
-    justify-content: start;
   }
 }
 

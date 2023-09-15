@@ -114,6 +114,9 @@ export class FirebaseControlService {
   querySubCollection() {
   }
 
+  async getCollection(address:string){
+    return collectionData(collection(this.firestore, address));
+  }
 }
 
 interface tFile {

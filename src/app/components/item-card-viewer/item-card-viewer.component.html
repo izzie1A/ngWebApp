@@ -1,0 +1,49 @@
+<div class="itemCard">
+    <!-- view -->
+    <div *ngIf="itemCardMode=='view'">
+        <!-- <div class=""> -->
+        <div class="itemCardImagePosterFrame">
+            <img src="https://picsum.photos/300/900" class="">
+        </div>
+
+        <div class="itemCardHeader flexAround">
+            <a>{{item.name}}</a>
+            <div>
+                <button class="itemImageButton" [style]="'background-color:var(--histarri)'"
+                    (click)="itemCardModeSwitch('viewDetail')">
+                    <span class="material-symbols-outlined">more</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- viewDetail -->
+    <div *ngIf="itemCardMode=='viewDetail'">
+        <div class="itemCardImagePosterFrame">
+            <img src="https://picsum.photos/300/900" class="itemImageFrameImage">
+        </div>
+
+        <div class="itemCardHeader flexAround">
+            <a class="itemCardTitle">{{item.name}}</a>
+            <div class="itemCardControlBar">
+                <button class="  itemImageButton" [style]="'background-color:var(--green)'"
+                    (click)="itemCardModeSwitch('view')">
+                    <span class="material-symbols-outlined"> folder </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="itemCardSholder">
+            <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
+                <a>{{item.description}}</a>
+            </div>
+        </div>
+        <div class="itemCardBody">
+        </div>
+    </div>
+
+
+
+</div>

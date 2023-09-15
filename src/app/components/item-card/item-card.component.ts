@@ -2,16 +2,16 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { FirebaseControlService } from "src/app/services/firebase-control.service";
 
+import { faker } from '@faker-js/faker';
+
 @Component({
   selector: 'app-item-card',
   templateUrl: './item-card.component.html',
   styleUrls: ['./item-card.component.css']
 })
 export class ItemCardComponent {
-  @Input() item: any = undefined;
-  @Input() itemcardMode: string = '';
-
-  // @Input() item$: Observable<any[]> | undefined;
+  // @Input() item: any = undefined;
+  @Input() item: Observable<any[]> | any | undefined;
 
   editmode: boolean = false;
   saved: boolean = false;
