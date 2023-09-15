@@ -32,14 +32,16 @@ export class ItemCardListComponent {
   createEmpty() {
     let x = new tItem('undefinded', 'undefinded');
     let imgUrl = 'https://picsum.photos/200/300'
+    let price =faker.commerce.price()
     let emptyObj = {
-      name: faker.commerce.product(),
-      description: faker.commerce.productDescription(),
       createTime: Date.now(),
       id: '0Undefinded',
-      tagArray:[],
+      name: faker.commerce.productName(),
+      description: faker.commerce.productDescription(),
+      price: price,
       fileArray: [],
-      imageArray: [imgUrl,imgUrl,imgUrl],
+      tagArray: [price,faker.commerce.productAdjective(), faker.commerce.productAdjective(), faker.commerce.productMaterial()],
+      imageArray: [imgUrl, imgUrl, imgUrl],
     }
     this.fbS.createDoc(this.address, emptyObj.id, emptyObj);
   }

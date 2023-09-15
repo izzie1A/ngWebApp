@@ -67,19 +67,32 @@ export class ItemCardComponent {
   }
   // keyvalue edit
 
-  localAddField(ref: any, key: any, value: any) {
+  localAddField( key: any, value: any) {
     this.item[key] = value;
   }
-  localChangeField(ref: any, key: any, value: any) {
+  localChangeField( key: any, value: any) {
     this.item[value] = this.item[key];
     delete this.item[key];
     console.log(this.item[key]);
   }
-  localDeleteField(ref: any, key: any, value: any) {
+  localDeleteField( key: any, value: any) {
     this.item[value] = this.item[key];
     delete this.item[key];
     console.log(this.item[key]);
   }
+
+  
+  localArrayAdd(ref: any, value: any) {
+    this.item[ref].push(value);
+  }
+  localArrayChange(ref: any, i: number, value:any) {
+    this.item[ref][i] = value;
+  }
+  localArrayDelete(ref: any, i: number) {
+    console.log(this.item[ref],i)
+    this.item[ref].splice(i, 1);
+    console.log(this.item[ref]) }
+
 
   onFileSelected(event: any, ref: any, key: any) {
 
@@ -107,7 +120,7 @@ export class ItemCardComponent {
   onFileDelete(event: any, ref: any, key: any, index: number) {
     console.log(event, ref, key, index)
     console.log(ref[key])
-    this.item[key].splice(index, 1)
+    this.item[key].splice(index, 1);
     console.log(ref[key])
   }
   onFileClear(event: any, ref: any, key: any, index: number) {
@@ -116,6 +129,7 @@ export class ItemCardComponent {
     this.item[key][index] = null
     console.log(ref[key])
   }
+
 
   onFileArraySelected(event: any, ref: any, key: any) {
 
@@ -137,7 +151,7 @@ export class ItemCardComponent {
         console.log('File available at', downloadURL);
         this.item[key].pop();
         this.item[key].push(downloadURL);
-      });
+      }); 
       console.log(url);
       return url;
     });
@@ -177,6 +191,7 @@ export class ItemCardComponent {
 
 
 }
+
 function getAverageRGB(imgEl: any) {
 
   var blockSize = 5, // only visit every 5 pixels

@@ -1,7 +1,3 @@
-{{item.name}}
-{{item.imageArray}}
-{{item.descritpion}}
-
 <div class="itemCard">
     <!-- view -->
     <div *ngIf="itemCardMode=='view'">
@@ -45,13 +41,16 @@
         </div>
 
         <div class="itemCardSholder">
+            <!-- <div class="itemCardTagList">
+                <div class="itemCardTag" *ngFor="let tag of item.tagArray">{{tag}}</div>
+            </div> -->
+
             <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
                 <a>{{item.description}}</a>
             </div>
         </div>
-        <div class="itemCardBody">
-            <p>asfas</p>
-        </div>
+
+
     </div>
 
     <!-- edit -->
@@ -72,6 +71,7 @@
                 </button>
             </div>
         </div>
+
         <div class="itemCardSholder">
             <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
             </div>
@@ -87,12 +87,15 @@
                     <div *ngFor="let x of item.imageArray; let i = index" class="itemImageFrame" class="itemImageFrame">
                         <img [src]="x" class="itemImageFrameImage">
                         <div class="imageFramePannel">
-                            <button class="material-symbols-outlined upload-btn-wrapper itemImageButton" [style]="'background-color:var(--yellow)'">
+                            <button class="material-symbols-outlined upload-btn-wrapper itemImageButton"
+                                [style]="'background-color:var(--yellow)'">
                                 Upload
-                                <input class="fileInput" type="file" (change)="onFileArrayEdit('loreamFolder/','imageArray',i,imgListImgInput)" #imgListImgInput>
+                                <input class="fileInput" type="file"
+                                    (change)="onFileArrayEdit('loreamFolder/','imageArray',i,imgListImgInput)"
+                                    #imgListImgInput>
                             </button>
-                            <button class="itemImageButton material-symbols-outlined" (click)="onFileArrayDelete('imageArray',i)"
-                                [style]="'background-color:var(--red)'">
+                            <button class="itemImageButton material-symbols-outlined"
+                                (click)="onFileArrayDelete('imageArray',i)" [style]="'background-color:var(--red)'">
                                 <span>delete</span>
                             </button>
                         </div>
@@ -101,23 +104,41 @@
             </div>
 
 
-            <div>
-                <div class="itemCard">
-                    <div class="itemCardImagePosterFrame">
-                        <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
-                    </div>
+            <div class="itemCard">
+                <div class="itemCardImagePosterFrame">
+                    <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+                </div>
 
-                    <div class="itemCardHeader flexAround">
-                        <a>{{item.name}}</a>
+                <div class="itemCardHeader flexAround">
+                    <a>{{item.name}}</a>
+                </div>
+                <div class="itemCardSholder">
+
+                </div>
+
+                <!-- tag -->
+                <!-- <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
+                    <div class="itemCardTag">
+                        <input type="text" value="taglocalChangeField">
                     </div>
-                    <div class="itemCardSholder">
-                        <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-                            <!-- <input type="text" value="{{item.description}}"> -->
-                            <textarea  value="{{item.description}}" [style]="'width:100%'"></textarea>
+                    <div class="flexAround" *ngFor="let tag of item.tagArray; let i = index">
+                        <button class="itemImageButton material-symbols-outlined"
+                            (click)="localArrayDelete('tagArray',i)" [style]="'background-color:var(--red)'">
+                            <span>delete</span>
+                        </button>
+                        <div class="itemCardTag">
+                            <input type="text" value="taglocalChangeField">
                         </div>
                     </div>
+                </div> -->
+                <!-- tag -->
+
+
+                <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
+                    <textarea value="{{item.description}}" [style]="'width:100%'"></textarea>
                 </div>
             </div>
+
 
 
         </div>
