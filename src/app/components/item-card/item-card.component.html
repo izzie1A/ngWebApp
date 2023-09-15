@@ -1,78 +1,117 @@
-<div class="itemCard">
-    <div class="itemCardHeader flexAround">
-        <div [style]="'overflow: hidden;'">
-            <h3>{{item.name}}</h3>
-        </div>
-        <div class="itemCardControlBar">
-            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'">
-                save
-            </button>
-            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--yellow)'">
-                close
-            </button>
-            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--red)'">
-                delete
-            </button>
-        </div>
-    </div>
-    <div class="itemCardSholder flexAround">
-        <a>{{item.name}}</a>
-    </div>
-    <div class="itemCardBody">
-        <p>{{item.description}}</p>
-        <div class="itemCardImageFrameList">
-            <div *ngFor="let x of item.imageArray" class="itemImageFrame">
-                <img [src]="x" class="itemImageFrameImage">
-                <div class="imageFramePannel">
-                    <button class="itemImageButton">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="itemImageButton">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                    <button class="itemImageButton">
-                        <span class="material-symbols-outlined">clear</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="">
-            <iframe></iframe>
-            <input type="file">
-        </div>
-
-        <div>
-            <div class="itemCardImagePoster">
-                <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
-            </div>
-            <p>sdasd</p>
-        </div>
-    </div>
-</div>
-
-<!-- poster -->
+<!-- view -->
 <div class="itemCard">
     <div class="itemCardImagePoster">
         <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
     </div>
 
-    <div class="itemCardSholder flexAround">
+    <div class="itemCardHeader flexAround">
         <a>{{item.name}}</a>
+        <div>
+            <button class="itemImageButton" [style]="'background-color:var(--histarri)'">
+                <span class="material-symbols-outlined" (click)="itemCardModeSwitch('viewDetail')">more</span>
+            </button>
+        </div>
     </div>
-    <div class=""> 
-        <a>{{item.description}}</a>
+</div>
+
+<!-- viewDetail -->
+<div class="itemCard">
+    <div class="itemCardImagePoster">
+        <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+    </div>
+    <div class="itemCardHeader flexAround">
+        <a>{{item.name}}</a>
+        <div class="flexAround">
+            <button class=" material-symbols-outlined itemImageButton" [style]="'background-color:var(--histarri)'">
+                <span class="" (click)="itemCardModeSwitch('viewDetail')">more</span>
+            </button>
+            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
+                (click)="itemCardModeSwitch('edit')">
+                <span> edit </span>
+            </button>
+        </div>
+    </div>
+    <div class="itemCardSholder">
+        <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
+            <a>{{item.description}}</a>
+        </div>
+    </div>
+    <div class="itemCardBody">
+    </div>
+</div>
+
+<!-- edit -->
+<div class="itemCard">
+    <div class="itemCardHeader flexAround">
+        <a class="itemCardTitle">{{item.name}}</a>
+        <div class="itemCardControlBar">
+            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
+                (click)="itemCardModeSwitch('edit')">
+                <span> edit </span>
+            </button>
+            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--yellow)'"
+                (click)="itemCardModeSwitch('viewDetail')">
+                <span> more </span>
+            </button>
+            <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--red)'"
+                (click)="itemCardModeSwitch('view')">
+                <span> delete </span>
+            </button>
+        </div>
+    </div>
+    <div class="itemCardSholder">
+        <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
+        </div>
+    </div>
+    
+
+    <div class="itemCardBody">
+        <div>
+            <input type="file">
+            <div class="itemCardImageFrameList">
+                <div *ngFor="let x of item.imageArray" class="itemImageFrame">
+                    <img [src]="x" class="itemImageFrameImage">
+                    <div class="imageFramePannel">
+                        <button class="itemImageButton material-symbols-outlined"
+                            [style]="'background-color:var(--yellow)'">
+                            <span>edit</span>
+                        </button>
+                        <button class="itemImageButton material-symbols-outlined"
+                            [style]="'background-color:var(--red)'">
+                            <span>delete</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <input type="file">
+            <div class="itemCard">
+                <div class="itemCardImagePoster">
+                    <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+                </div>
+                
+                <div class="itemCardHeader flexAround">
+                    <a>{{item.name}}</a>
+                </div>
+                <div class="itemCardSholder">
+                    <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
+                        <a>{{item.description}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 </div>
 
-
-
-
-
-<div class="itemCard" >
+<!-- edit keyValue-->
+<div class="itemCard" *>
     <div class="itemCardHeader">
-        <a>{{item$}}</a>
         <div>
             <button class="itemImageButton">
                 <span class="material-symbols-outlined">edit</span>

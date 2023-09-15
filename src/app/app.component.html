@@ -1,50 +1,26 @@
-<div>
-    <button>asds</button>
-    <button>asds</button>
-    <button>asds</button>
-    <button>asds</button>
-    <button>asds</button>
-</div>
-
-    <button class="hClick">asds</button>
-    <button class="hClick">asds</button>
-    <button class="hClick">asds</button>
-    <button class="hClick">asds</button>
-    <button class="hClick">asds</button>
 <div class="appContainer">
-    <app-item-card-list [address]="'/test'"></app-item-card-list>
-</div>
-<div>
-
-    <router-outlet></router-outlet>
     <app-nav-bar></app-nav-bar>
+    <div [style]="'height:93%; overflow-y:scroll;overflow-x: hidden;'">
+        <router-outlet></router-outlet>
+    </div>
 </div>
-<!-- <div *ngFor="let item of item$|async">{{item}}</div> -->
 <style>
-    .appContainer{
-        background-color: var(--seaSick);
-        padding: 1%;
-    }
-    .navBar {
+    .appContainer {
+        height: 100%;
         display: flex;
-        background-color: var(--sub);
-        height: 7vh;
-        height: 10vh;
-        width: 100vw;
-        bottom: 0;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
+        flex-direction: column-reverse;
     }
 
-    .navBarButton {
-        background-color: var(--main);
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        width: 20%;
-        overflow: hidden;
-        justify-content: center;
+    @media only screen and (min-width: 700px) {
+        .appContainer {
+            flex-direction: column;
+        }
     }
 
+    @media only screen and (min-width: 1000px) {
+        .appContainer {
+            flex-direction: initial;
+        }
 
+    }
 </style>

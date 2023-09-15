@@ -1,8 +1,16 @@
 <div class="itemCard">
   <div class="itemCardHeader flexAround">
-    <div class="">
-      <h3>:{{address.split("/").pop()}}</h3>
+    <div class="flexAround">
+      <select (change)="switchCollection(collectionOption.value)" #collectionOption>
+        <option value="">--Please choose an option--</option>
+        <option *ngFor="let collection of collectionArray" value="{{collection.address}}">
+          {{collection.displayName}}
+        </option>
+        <option value="test">test</option>
+      </select>
+      <!-- <h3>{{address.split("/").pop()}}</h3> -->
     </div>
+
     <div class="itemCardControlBar">
       <button class="material-symbols-outlined itemImageButton" (click)="createEmpty()"><span> create_new_folder</span>
       </button>
@@ -15,22 +23,14 @@
     </div>
   </div>
 
-  <div class="itemSholder flexAround">
-    <a>:{{address}}</a>
-    <select (change)="switchCollection(collectionOption.value)" #collectionOption>
-      <option value="">--Please choose an option--</option>
-      <option *ngFor="let collection of collectionArray" value="{{collection.address}}">
-        {{collection.displayName}}
-      </option>
-      <option value="test">test</option>
-    </select>
+  <div class="itemCardSholder flexAround">
+    <!-- <a class="itemCardKeytValue">/{{address}}</a> -->
   </div>
 
   <div class="itemCardList">
     <app-item-card *ngFor="let item of item$|async" [item]="item"></app-item-card>
   </div>
 </div>
-
 <style>
   .itemCardList {}
 
@@ -49,4 +49,6 @@
       justify-content: space-evenly;
     }
   }
+
+
 </style>

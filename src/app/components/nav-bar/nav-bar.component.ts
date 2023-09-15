@@ -14,7 +14,7 @@ export class NavBarComponent {
 
   constructor(){
     let home: navBarItem = {dir:'home',iconName:'home'};
-    let firebase: navBarItem = {dir:'firebase',iconName:'local_fire_department'};
+    let firebase: navBarItem = {dir:'firebase',iconName:'folder'};
     let search: navBarItem = {dir:'search',iconName:'search'};
     let defaultLink: navBarItem = {dir:'',iconName:'lan'};
     let profile: navBarItem = {dir:'profile',iconName:'login'};
@@ -23,14 +23,17 @@ export class NavBarComponent {
       home,
       firebase,
       search,
-      defaultLink,
       profile,
+      // defaultLink,
     ];
   }
 
   expanNavbar(){
     this.navHeight = this.navExpanded ? '0vh' : '20vh';
     this.navExpanded = this.navExpanded ? false : true;
+  }
+  myFunction(inputDiv: any) {
+    inputDiv.classList.toggle("change");
   }
 
   self(input:any){

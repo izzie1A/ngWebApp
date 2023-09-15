@@ -1,20 +1,45 @@
 :root {
   --blue: #389cff;
+  --deepBlue: #3f51b5;
   /* --red: rgb(255, 61, 61); */
-  --red: #da2c38;
-  --yellow: #ffbf45;
+  --red: #fc4753;
+  --yellow: #f7bc4e;
   --green: #88b25b;
   --white: #ffffff;
   --lightBlue: #8da9c4;
   --lightGray: #cccccc;
-
+  --dark:#4d4d4d;
 
   --seaSick: #e9e8e2;
 
+  /* --main: #2c7fdd; */
+  --main: #c83f48;
+  --sub: #ffc353;
 
-  --main: #2c7fdd;
-  --sub: #619fe5;
+  --main: #4d4d4d;
+  --sub: #bebebe;
+  --histarri:var(--yellow);
+
+  --title: 24px;
+  --context: 12px;
+  --keyValue: 9px;
 }
+
+@media only screen and (min-width: 700px) {
+  :root {
+    --title: 12px;
+    --context: 9px;
+    --keyvalue: 6px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  :root {
+    --title: 12px;
+    --context:6px;
+    --keyvalue: 3px;
+  }
+}
+
 
 body,
 html {
@@ -38,16 +63,20 @@ body::-webkit-scrollbar-thumb {
 
 .itemCard {
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-  border-radius: 15px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  border-radius: 1vmin;
   margin: 5%;
   overflow: hidden;
 }
 
-.itemCardTitle {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+
+
+
+.itemCardHeader {
+  background-color: var(--main);
+  color: white;
+  padding: 2%;
+  color: var(--white);
 }
 
 .itemCardControlBar {
@@ -56,6 +85,18 @@ body::-webkit-scrollbar-thumb {
   margin-right: 5%;
 }
 
+.itemCardSholder {
+  background-color: var(--sub);
+  padding: 2%;
+  color: var(--white);
+  font-size: 0.5rem;
+}
+
+.itemCardBody{
+
+}
+
+/* image */
 .itemCardImagePanel {
   width: 100%;
   overflow: hidden;
@@ -67,6 +108,84 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
 }
 
+.itemCardImageFrameList {
+  display: flex;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 2%;
+  justify-content: space-around;
+
+}
+
+.itemImageFrame {
+  height: 120px;
+  width: 120px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+}
+
+.itemCardImagePoster {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.itemImageFrameImage {
+  width: 100%;
+}
+
+.imageFramePannel {
+  position: absolute;
+  top: 0%;
+  right: 0;
+  display: flex;
+  justify-content: space-evenly;
+  width: 30%;
+  flex-direction: column;
+}
+
+/* text style */
+.keyValue {
+  display: grid;
+  grid-template-columns: 31% 69%;
+  align-content: center;
+  justify-content: space-around;
+  padding-left: 2%;
+
+  box-shadow: rgb(51, 51, 51) 0px 0.125rem 3px 0px;
+  margin-bottom: 2%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemCardTitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: var(--title);
+}
+.itemCardContent {
+  font-size: var(--context);
+}
+.itemCardKeyValue {
+  font-size: var(--keyValue);
+}
+
+
+
+/* file upload */
+.fileContext {
+  width: 100%;
+}
 
 .upload-btn-wrapper {
   position: relative;
@@ -113,19 +232,34 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
   align-items: center;
   font-size: 24px !important;
+  color: var(--dark);
 }
-
 @media only screen and (min-width: 700px) {
   .itemImageButton {
     font-size: 12px !important;
+  }
+
+  .itemImageFrame {
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+  }
+
+  .itemCardImageFrameList {
+    justify-content: start;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .itemCardImagePoster {
+    height: auto;
   }
 }
 
 /* CSS button */
 .itemImageButton {
   border: 1px solid #222222;
-  background-color: #ffffff;
-  color: #222222;
+  /* background-color: #ffffff; */
   border-radius: 8px;
   padding: 5%;
   margin: 5%;
@@ -138,6 +272,7 @@ body::-webkit-scrollbar-thumb {
   user-select: none;
   -webkit-user-select: none;
   width: auto;
+  
 }
 
 .itemImageButton:focus-visible {
@@ -160,15 +295,18 @@ body::-webkit-scrollbar-thumb {
 
 .hClick {
   all: unset;
-  
+
 }
+
 .hClick:active {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
+
 .hClick:focus {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-  color: var(--yellow) ;
+  color: var(--yellow);
 }
+
 .hClick:hover {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }

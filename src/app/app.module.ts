@@ -11,6 +11,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemCardListComponent } from './components/item-card-list/item-card-list.component';
+
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { MapViewerComponent } from './components/slides/map-viewer/map-viewer.component';
@@ -18,6 +19,8 @@ import { ProfileComponent } from './components/slides/profile/profile.component'
 import { ThreeJsComponent } from './components/slides/three-js/three-js.component';
 import { HomePageComponent } from './components/slides/home-page/home-page.component';
 import { SettingComponent } from './components/slides/setting/setting.component';
+import { FileControlComponent } from './components/slides/file-control/file-control.component';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 
 
 @NgModule({
@@ -32,6 +35,8 @@ import { SettingComponent } from './components/slides/setting/setting.component'
     ThreeJsComponent,
     HomePageComponent,
     SettingComponent,
+    FileControlComponent,
+    ImageViewerComponent,
   ],
   imports: [
     BrowserModule,

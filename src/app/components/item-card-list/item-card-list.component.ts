@@ -26,7 +26,6 @@ export class ItemCardListComponent {
       this.createEmpty();
     }
     );
-
   }
 
   createEmpty() {

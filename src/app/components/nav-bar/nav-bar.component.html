@@ -1,33 +1,61 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-<nav class="navBar">
-    <button (click)="self(navButton)" class="navBarButton hClick " routerLink="/{{movie.dir.toString()}}"
-        *ngFor="let movie of navbarGidContainer" #navButton>
-        <span class="material-symbols-outlined ">
-            {{movie.iconName}}
-        </span>
-    </button>
-</nav>
+<div class="">
+    <nav class="navBar">
+        <button class="navBarButton hClick " (click)="expanNavbar()" (click)="myFunction(hamburgerIconDiv)"
+            #hamburgerIconDiv>
+            <div>
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </button>
+        <button (click)="self(navButton)" class="navBarButton hClick " routerLink="/{{movie.dir.toString()}}"
+            *ngFor="let movie of navbarGidContainer" #navButton>
+            <span class="material-symbols-outlined ">
+                {{movie.iconName}}
+            </span>
+        </button>
+    </nav>
+
+</div>
 
 
 <style>
-    .navBar {
+   .navBar {
         display: flex;
-        background-color: var(--sub);
+        /* background-color: var(--deepBlue); */
+        background-color: var(--main);
         height: 7vh;
-        position: fixed;
-        width: 90%;
-        left: 5%;
+        width: 100%;
         bottom: 0;
-        flex-wrap: wrap;
         justify-content: space-evenly;
-        border-radius: 25px 25px 0px 0px;
         overflow: hidden;
+        border-radius: 25px 25px 0px 0px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     }
 
+ 
+    @media only screen and (min-width: 700px) {
+        .navBar {
+            position: relative;
+            border-radius: 0px 0px 0px 0px;
+        }
+    }
+
+    @media only screen and (min-width: 1000px) {
+        .navBar {
+            /* position: fixed; */
+            width: 5vw;
+            height: 100vh;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    } 
+
     .navBarButton {
-        background-color: var(--main);
         color: var(--seaSick);
         font-size: 24px;
         display: flex;
@@ -37,8 +65,40 @@
         justify-content: center;
     }
 
+    @media only screen and (min-width: 1000px) {
+        .navBarButton {
+            width: 100%;
+            height: 20%;
+        }
+    }
 
     .hClick:focus {
         color: var(--yellow);
+    }
+
+
+    .bar1,
+    .bar2,
+    .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: #ffffff;
+        margin: 6px 0;
+        transition: 0.4s;
+
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1.5px;
+
+    }
+
+    .change .bar1 {
+        transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .change .bar2 {
+        opacity: 0;
+    }
+
+    .change .bar3 {
+        transform: translate(0, -11px) rotate(45deg);
     }
 </style>
