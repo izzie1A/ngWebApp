@@ -37,6 +37,7 @@ export class ItemCardListComponent {
       description: faker.commerce.productDescription(),
       createTime: Date.now(),
       id: '0Undefinded',
+      tagArray:[],
       fileArray: [],
       imageArray: [imgUrl,imgUrl,imgUrl],
     }

@@ -1,7 +1,11 @@
+{{item.name}}
+{{item.imageArray}}
+{{item.descritpion}}
+
 <div class="itemCard">
     <!-- view -->
     <div *ngIf="itemCardMode=='view'">
-        <div class="itemCardImagePoster">
+        <div class="itemCardImagePosterFrame">
             <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
         </div>
 
@@ -19,8 +23,8 @@
 
     <!-- viewDetail -->
     <div *ngIf="itemCardMode=='viewDetail'">
-        <div class="itemCardImagePoster"> 
-            <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+        <div class="itemCardImagePosterFrame">
+            <img src="https://picsum.photos/300/300" class="itemImageFrameImage">
         </div>
 
         <div class="itemCardHeader flexAround">
@@ -30,8 +34,7 @@
                     (click)="itemCardModeSwitch('view')">
                     <span> folder </span>
                 </button>
-                <button class="material-symbols-outlined itemImageButton"
-                    (click)="itemCardModeSwitch('viewDetail')">
+                <button class="material-symbols-outlined itemImageButton" (click)="itemCardModeSwitch('viewDetail')">
                     <span> more </span>
                 </button>
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--red)'"
@@ -40,13 +43,14 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="itemCardSholder">
             <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
                 <a>{{item.description}}</a>
             </div>
         </div>
         <div class="itemCardBody">
+            <p>asfas</p>
         </div>
     </div>
 
@@ -56,15 +60,14 @@
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
-                    (click)="itemCardModeSwitch('edit')">
+                    (click)="itemCardModeSwitch('view')">
                     <span> folder </span>
                 </button>
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--yellow)'"
                     (click)="itemCardModeSwitch('viewDetail')">
                     <span> more </span>
                 </button>
-                <button class="material-symbols-outlined itemImageButton" 
-                    (click)="itemCardModeSwitch('view')">
+                <button class="material-symbols-outlined itemImageButton" (click)="itemCardModeSwitch('edit')">
                     <span> edit </span>
                 </button>
             </div>
@@ -77,16 +80,18 @@
 
         <div class="itemCardBody">
             <div>
-                <input type="file">
+                <input class="fileInput" type="file"
+                    (change)="onFileArrayPush( 'loreamFolder/','imageArray',imageArrayInput)" #imageArrayInput>
+
                 <div class="itemCardImageFrameList">
-                    <div *ngFor="let x of item.imageArray" class="itemImageFrame">
+                    <div *ngFor="let x of item.imageArray; let i = index" class="itemImageFrame" class="itemImageFrame">
                         <img [src]="x" class="itemImageFrameImage">
                         <div class="imageFramePannel">
-                            <button class="itemImageButton material-symbols-outlined"
-                                [style]="'background-color:var(--yellow)'">
-                                <span>edit</span>
+                            <button class="material-symbols-outlined upload-btn-wrapper itemImageButton" [style]="'background-color:var(--yellow)'">
+                                Upload
+                                <input class="fileInput" type="file" (change)="onFileArrayEdit('loreamFolder/','imageArray',i,imgListImgInput)" #imgListImgInput>
                             </button>
-                            <button class="itemImageButton material-symbols-outlined"
+                            <button class="itemImageButton material-symbols-outlined" (click)="onFileArrayDelete('imageArray',i)"
                                 [style]="'background-color:var(--red)'">
                                 <span>delete</span>
                             </button>
@@ -97,9 +102,8 @@
 
 
             <div>
-                <input type="file">
                 <div class="itemCard">
-                    <div class="itemCardImagePoster">
+                    <div class="itemCardImagePosterFrame">
                         <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
                     </div>
 
@@ -108,7 +112,8 @@
                     </div>
                     <div class="itemCardSholder">
                         <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-                            <input type="text" value="{{item.description}}">
+                            <!-- <input type="text" value="{{item.description}}"> -->
+                            <textarea  value="{{item.description}}" [style]="'width:100%'"></textarea>
                         </div>
                     </div>
                 </div>

@@ -256,9 +256,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media only screen and (min-width: 1000px) {
-  .itemCardImagePoster {
-    height: auto;
-  }
 }
 
 /* CSS button */

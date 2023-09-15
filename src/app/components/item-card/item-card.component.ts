@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { FirebaseControlService } from "src/app/services/firebase-control.service";
 
 import { faker } from '@faker-js/faker';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 @Component({
   selector: 'app-item-card',
@@ -39,10 +40,10 @@ export class ItemCardComponent {
       case 'edit':
         this.itemCardMode = 'edit'
         break;
-        case 'viewDetail':
+      case 'viewDetail':
         this.itemCardMode = 'viewDetail'
         break;
-        case 'view':
+      case 'view':
         this.itemCardMode = 'view'
         break;
     }
@@ -64,7 +65,7 @@ export class ItemCardComponent {
         break;
     }
   }
-
+  // keyvalue edit
 
   localAddField(ref: any, key: any, value: any) {
     this.item[key] = value;
@@ -99,7 +100,7 @@ export class ItemCardComponent {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (event) => {
-        this.item[key][index] = event.target?.result;
+        this.item[index] = event.target?.result;
       };
     }
   }
@@ -115,6 +116,66 @@ export class ItemCardComponent {
     this.item[key][index] = null
     console.log(ref[key])
   }
+
+  onFileArraySelected(event: any, ref: any, key: any) {
+
+  }
+  onFileArrayPush(address: string, key: any, input: HTMLInputElement) {
+    if (!input.files) return
+    this.item[key].push('downloading');
+    const files: FileList = input.files;
+    let fileName = input.value.split("\\").pop();
+    let url = address + fileName;
+    console.log(address + fileName)
+    const storage = getStorage();
+    const storageRef = ref(storage, url);
+    const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    uploadTask.then((snapshotx) => {
+      console.log('Uploaded an array!');
+      console.log(snapshotx);
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        this.item[key].pop();
+        this.item[key].push(downloadURL);
+      });
+      console.log(url);
+      return url;
+    });
+  }
+  onFileArrayEdit(address: string, key: string, i: number, input: HTMLInputElement) {
+    if (!input.files) return
+    this.item[key][i]='downloading';
+    const files: FileList = input.files;
+    let fileName = input.value.split("\\").pop();
+    let url = address + fileName;
+    console.log(address + fileName)
+    const storage = getStorage();
+    const storageRef = ref(storage, url);
+    const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    uploadTask.then((snapshotx) => {
+      console.log('Uploaded an array!');
+      console.log(snapshotx);
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        this.item[key][i] = downloadURL;
+      });
+      console.log(url);
+      return url;
+    });
+  }
+  onFileArrayDelete(key: any, index: number) {
+    console.log(this.item[key])
+    this.item[key].splice(index, 1)
+    console.log(this.item[key])
+  }
+  onFileArrayClear(event: any, ref: any, key: any, index: number) {
+    console.log(event, ref, key, index)
+    console.log(ref[key])
+    this.item[key][index] = null
+    console.log(ref[key])
+  }
+
+
 }
 function getAverageRGB(imgEl: any) {
 
