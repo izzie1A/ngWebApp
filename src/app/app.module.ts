@@ -15,13 +15,14 @@ import { ItemCardListComponent } from './components/item-card-list/item-card-lis
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { MapViewerComponent } from './components/slides/map-viewer/map-viewer.component';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { ItemCardViewerComponent } from './components/item-card-viewer/item-card-viewer.component';
+
 import { ProfileComponent } from './components/slides/profile/profile.component';
 import { ThreeJsComponent } from './components/slides/three-js/three-js.component';
 import { HomePageComponent } from './components/slides/home-page/home-page.component';
 import { SettingComponent } from './components/slides/setting/setting.component';
 import { FileControlComponent } from './components/slides/file-control/file-control.component';
-import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
-import { ItemCardViewerComponent } from './components/item-card-viewer/item-card-viewer.component';
 
 
 @NgModule({
