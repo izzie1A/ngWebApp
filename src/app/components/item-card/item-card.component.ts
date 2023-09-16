@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { FirebaseControlService } from "src/app/services/firebase-control.service";
+import { AuthService } from "src/app/services/auth.service";
 
 import { faker } from '@faker-js/faker';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
@@ -13,6 +14,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 export class ItemCardComponent {
   // @Input() item: any = undefined;
   @Input() item: Observable<any[]> | any | undefined;
+  @Input() address: string = '';
 
   editmode: boolean = false;
   saved: boolean = false;
@@ -21,7 +23,7 @@ export class ItemCardComponent {
 
   itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'viewDetail';
 
-  constructor(public firebaseS: FirebaseControlService) {
+  constructor(public firebaseS: FirebaseControlService, public afs: AuthService) {
     this.backupItem = this.item;
   }
 
@@ -45,14 +47,8 @@ export class ItemCardComponent {
         break;
       case 'view':
         this.itemCardMode = 'view'
-        this.t();
         break;
     }
-  }
-
-  t(){
-    console.log(this.item)
-    // this.firebaseS.docSave('/loreamFolder','',this.item)
   }
 
 
@@ -74,31 +70,32 @@ export class ItemCardComponent {
   }
   // keyvalue edit
 
-  localAddField( key: any, value: any) {
+  localAddField(key: any, value: any) {
     this.item[key] = value;
   }
-  localChangeField( key: any, value: any) {
+  localChangeField(key: any, value: any) {
     this.item[value] = this.item[key];
     delete this.item[key];
     console.log(this.item[key]);
   }
-  localDeleteField( key: any, value: any) {
+  localDeleteField(key: any, value: any) {
     this.item[value] = this.item[key];
     delete this.item[key];
     console.log(this.item[key]);
   }
 
-  
+
   localArrayAdd(ref: any, value: any) {
     this.item[ref].push(value);
   }
-  localArrayChange(ref: any, i: number, value:any) {
+  localArrayChange(ref: any, i: number, value: any) {
     this.item[ref][i] = value;
   }
   localArrayDelete(ref: any, i: number) {
-    console.log(this.item[ref],i)
+    console.log(this.item[ref], i)
     this.item[ref].splice(i, 1);
-    console.log(this.item[ref]) }
+    console.log(this.item[ref])
+  }
 
 
   onFileSelected(event: any, ref: any, key: any) {
@@ -114,27 +111,35 @@ export class ItemCardComponent {
       };
     }
   }
-  onFileEdit(event: any, ref: any, key: any, index: number) {
-    const file: File = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (event) => {
-        this.item[index] = event.target?.result;
-      };
-    }
+  onFileEdit(address: string, key: any, input: HTMLInputElement) {
+    if (!input.files) return
+    this.item[key] = 'downloading';
+    const files: FileList = input.files;
+    let fileName = input.value.split("\\").pop();
+    let url = address + fileName;
+    console.log(address + fileName)
+    const storage = getStorage();
+    const storageRef = ref(storage, url);
+    const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    uploadTask.then((snapshotx) => {
+      console.log('Uploaded an array!');
+      console.log(snapshotx);
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        this.item[key] = downloadURL;
+      });
+      console.log(url);
+      return url;
+    });
   }
-  onFileDelete(event: any, ref: any, key: any, index: number) {
+  onFileDelete(address: string, key: any, index: number) {
     console.log(event, ref, key, index)
-    console.log(ref[key])
-    this.item[key].splice(index, 1);
-    console.log(ref[key])
+    console.log(this.item[key])
+    delete this.item[key] ;
+    console.log(this.item[key])
   }
-  onFileClear(event: any, ref: any, key: any, index: number) {
-    console.log(event, ref, key, index)
-    console.log(ref[key])
-    this.item[key][index] = null
-    console.log(ref[key])
+  onFileClear(address: string, key: any) {
+    this.item[key] = null
   }
 
 
@@ -158,14 +163,14 @@ export class ItemCardComponent {
         console.log('File available at', downloadURL);
         this.item[key].pop();
         this.item[key].push(downloadURL);
-      }); 
+      });
       console.log(url);
       return url;
     });
   }
   onFileArrayEdit(address: string, key: string, i: number, input: HTMLInputElement) {
     if (!input.files) return
-    this.item[key][i]='downloading';
+    this.item[key][i] = 'downloading';
     const files: FileList = input.files;
     let fileName = input.value.split("\\").pop();
     let url = address + fileName;

@@ -6,12 +6,20 @@ import { Auth, user, authState } from '@angular/fire/auth';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Observable } from 'rxjs/internal/Observable';
 import { ReturnStatement } from '@angular/compiler';
+
+import { faker } from '@faker-js/faker';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
+  fakeUser:any = {
+    uid:faker.string.uuid(),
+    name:'fake'+faker.person.firstName(),
+  }
+  storeUser:any;
 
   userSubscription: Subscription;
   authState$ = authState(this.auth);
@@ -19,21 +27,27 @@ export class AuthService {
   serverResponse:string = '';
 
   constructor() {
-
     this.userSubscription = this.user$.subscribe((aUser: User | null) => {
-      console.log(aUser);
       if (aUser != null) {
         console.log(aUser.email);
+        this.storeUser = aUser;
+      } else if(aUser == null){
+        console.log(aUser);
+        this.storeUser = this.fakeUser;
       };
     })  
-
     // this.emailRegister('izzie0082004@gmail.com','abc123','abc123');
-
   }
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
+
+  getUserID(){
+    let x = this.storeUser.uid!!? this.storeUser.uid: this.fakeUser.uid;
+    return  x ;
+  }
+
   checkRegisterValid(email: string) {
     const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const result: boolean = expression.test(email); // true
@@ -145,4 +159,3 @@ export class AuthService {
     });
   }
 }
-

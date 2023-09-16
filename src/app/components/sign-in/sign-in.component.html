@@ -46,7 +46,7 @@
                 <input type="password" #regPassword2>
             </div>
 
-            <button [style]="'width:90%; margin:5%;'" *ngIf="(this.authS.authState$ | async) === null"
+            <button [style]="'width:90%; margin:5%;'" 
                 (click)="this.authS.emailRegister(regEmail.value,regPassword.value,regPassword2.value)">
                 Register Now
             </button>

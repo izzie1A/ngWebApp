@@ -2,14 +2,23 @@
     <!-- view -->
     <div *ngIf="itemCardMode=='view'">
         <div class="itemCardImagePosterFrame">
-            <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+            <img src="{{item.posterImage}}" class="itemImageFrameImage">
         </div>
 
         <div class="itemCardHeader flexAround">
-            <a>{{item.name}}</a>
-            <div>
-                <button class="itemImageButton" [style]="'background-color:var(--histarri)'">
-                    <span class="material-symbols-outlined" (click)="itemCardModeSwitch('viewDetail')">more</span>
+            <a class="itemCardTitle">{{item.name}}</a>
+
+            <div class="itemCardControlBar">
+                <button class="material-symbols-outlined itemImageButton" (click)="itemCardModeSwitch('view')">
+                    <span> folder </span>
+                </button>
+                <button class="material-symbols-outlined itemImageButton" (click)="itemCardModeSwitch('viewDetail')"
+                    [style]="'background-color:var(--yellow)'">
+                    <span> more </span>
+                </button>
+                <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--red)'"
+                    (click)="itemCardModeSwitch('edit')">
+                    <span> edit </span>
                 </button>
             </div>
         </div>
@@ -20,7 +29,7 @@
     <!-- viewDetail -->
     <div *ngIf="itemCardMode=='viewDetail'">
         <div class="itemCardImagePosterFrame">
-            <img src="https://picsum.photos/300/300" class="itemImageFrameImage">
+            <img [src]="item.posterImage" class="itemImageFrameImage">
         </div>
 
         <div class="itemCardHeader flexAround">
@@ -73,8 +82,16 @@
         </div>
 
         <div class="itemCardSholder">
-            <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-            </div>
+            <button class="itemCardKeyValue" (click)="this.firebaseS.docSave(address,item.id,item)"
+                [style]="'color:var(--dark);'" [style]="'background-color:var(--green)'">
+                <span class="material-symbols-outlined"> save </span>
+                save
+            </button>
+            <button class="itemCardKeyValue" (click)="this.firebaseS.deleteDoc(address,item.id)"
+                [style]="'color:var(--dark);'" [style]="'background-color:var(--red);color:var(--seaSick);'">
+                <span class="material-symbols-outlined"> delete </span>
+                delete
+            </button>
         </div>
 
 
@@ -95,7 +112,8 @@
                                     #imgListImgInput>
                             </button>
                             <button class="itemImageButton material-symbols-outlined"
-                                (click)="onFileArrayDelete('imageArray',i)" [style]="'background-color:var(--red)'">
+                                (click)="onFileArrayDelete('imageArray',i)"
+                                [style]="'background-color:var(--red); color:var(--seaSick);'">
                                 <span>delete</span>
                             </button>
                         </div>
@@ -106,7 +124,19 @@
 
             <div class="itemCard">
                 <div class="itemCardImagePosterFrame">
-                    <img src="https://picsum.photos/300/200" class="itemImageFrameImage">
+                    <img [src]="item.posterImage" class="itemImageFrameImage">
+                    <div class="imageFramePannel">
+                        <button class="material-symbols-outlined upload-btn-wrapper itemImageButton"
+                            [style]="'background-color:var(--yellow)'">
+                            Upload
+                            <input class="fileInput" type="file"
+                                (change)="onFileEdit( 'loreamFolder/','posterImage',posterInput)" #posterInput>
+                        </button>
+                        <button class="itemImageButton material-symbols-outlined" (click)="onFileClear('','posterImage')"
+                            [style]="'background-color:var(--red); color:var(--seaSick);'">
+                            <span>clear</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="itemCardHeader flexAround">

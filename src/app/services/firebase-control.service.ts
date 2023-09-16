@@ -10,10 +10,13 @@ import { Storage, getStorage, provideStorage, ref, uploadBytesResumable, getDown
 export class FirebaseControlService {
   firestore: Firestore = inject(Firestore);
   private storage: Storage = inject(Storage);
+
+  firebaseServerResponse:any;
   constructor() {
   }
 
   async docSave(address: string, id: string, content: any) {
+    console.log(address,id,content)
     const docSnap = await getDoc(doc(this.firestore, address, id));
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());

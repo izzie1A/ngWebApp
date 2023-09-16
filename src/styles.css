@@ -84,7 +84,11 @@ html {
   padding: 2%;
   color: var(--white);
 }
-
+.itemCardHeaderTitle{
+  width: 69%;
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
+}
 .itemCardControlBar {
   display: flex;
   justify-content: space-evenly;
