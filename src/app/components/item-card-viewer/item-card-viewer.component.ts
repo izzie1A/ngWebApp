@@ -16,7 +16,7 @@ export class ItemCardViewerComponent {
 
   backupItem: any;
 
-  itemCardMode: 'view' | 'viewDetail' = 'viewDetail';
+  itemCardMode: 'view' | 'viewDetail' = 'view';
 
   constructor() {
   }

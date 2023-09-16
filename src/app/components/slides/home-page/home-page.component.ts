@@ -12,6 +12,6 @@ export class HomePageComponent {
   firestore: Firestore = inject(Firestore);
   
   constructor(fbSerice: FirebaseControlService) {
-    this.item$ = collectionData(collection(this.firestore, 'cities'));
+    this.item$ = collectionData(collection(this.firestore, 'loreamCollection'));
   }
 }

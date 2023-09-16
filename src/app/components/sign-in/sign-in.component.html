@@ -46,12 +46,26 @@
                 <input type="password" #regPassword2>
             </div>
 
-            <button [style]="'width:90%; margin:5%;'" 
+            <button [style]="'width:90%; margin:5%;'"
                 (click)="this.authS.emailRegister(regEmail.value,regPassword.value,regPassword2.value)">
                 Register Now
             </button>
         </div>
     </div>
+
+    <!-- email sign in -->
+    <div class="emailSigninContainer ">
+        <div class="keyValue">
+            <p class=" itemCardContent ">E-mail</p>
+            <input type="text" #signinEmail>
+            <p class=" itemCardContent ">Password</p>
+            <input type="text" #signinPassword>
+        </div>
+        <button [style]="' margin:5%;'">Sign In</button>
+    </div>
+    <p [style]="'color:red;'">
+        {{this.authS.serverResponse}}
+    </p>
 
     <div class="keyValue">
         <button class="" *ngIf="(this.authS.authState$ | async) === null" (click)="this.authS.googleSignin()">
@@ -61,22 +75,7 @@
         </button>
         <p class="itemCardContent">Sign-In with Google</p>
     </div>
-    <!-- email sign in -->
-    <div class="emailSigninContainer ">
-        <div class="keyValue">
-            <p class=" itemCardContent ">E-mail</p>
-            <input type="text" #signinEmail>
-            <p class=" itemCardContent ">Password</p>
-            <input type="text" #signinPassword>
-        </div>
-        <button [style]="' margin:5%;'" >Sign In</button>
-    </div>
-    <p [style]="'color:red;'">
-        {{this.authS.serverResponse}}
-    </p>
-
     <div class="emailLoginContainer">
-
     </div>
 </div>
 

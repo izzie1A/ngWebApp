@@ -21,7 +21,7 @@ export class ItemCardComponent {
 
   backupItem: any;
 
-  itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'viewDetail';
+  itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'view';
 
   constructor(public firebaseS: FirebaseControlService, public afs: AuthService) {
     this.backupItem = this.item;
@@ -71,6 +71,9 @@ export class ItemCardComponent {
   // keyvalue edit
 
   localAddField(key: any, value: any) {
+    this.item[key] = value;
+  }
+  localEditField(key: any, value: any) {
     this.item[key] = value;
   }
   localChangeField(key: any, value: any) {

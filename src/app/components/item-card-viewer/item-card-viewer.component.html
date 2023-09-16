@@ -3,7 +3,7 @@
     <div *ngIf="itemCardMode=='view'">
         <!-- <div class=""> -->
         <div class="itemCardImagePosterFrame">
-            <img src="https://picsum.photos/300/900" class="">
+            <img src="{{item.posterImage}}" class="itemImageFrameImage">
         </div>
 
         <div class="itemCardHeader flexAround">
@@ -22,7 +22,7 @@
     <!-- viewDetail -->
     <div *ngIf="itemCardMode=='viewDetail'">
         <div class="itemCardImagePosterFrame">
-            <img src="https://picsum.photos/300/900" class="itemImageFrameImage">
+            <img src="{{item.posterImage}}" class="itemImageFrameImage">
         </div>
 
         <div class="itemCardHeader flexAround">
@@ -37,12 +37,13 @@
 
         <div class="itemCardSholder">
             <!-- tag -->
-            <!-- <div class="itemCardTagList" >
-                <div class="itemCardTag" *ngFor="let tag of item.tagArray">{{tag}}</div>
-            </div> -->
-            
-            <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-                <a>{{item.description}}</a>
+            <div class="keyValue">
+                <div class="itemCardTagList">
+                    <div class="itemCardTag" *ngFor="let tag of item.tagArray">{{tag}}</div>
+                </div>
+                <div class="itemCardKeyValue" [style]="'color:var(--dark);padding:2%;'">
+                    <a >{{item.description}}</a>
+                </div>
             </div>
         </div>
 

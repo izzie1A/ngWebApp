@@ -140,33 +140,38 @@
                 </div>
 
                 <div class="itemCardHeader flexAround">
-                    <input type="text" value="{{item.name}}">
+                    <input (keyup.enter)="localEditField('name',itemCardName.value)"
+                    (blur)="localEditField('name',itemCardName.value)"
+                    type="text" value="{{item.name}}" #itemCardName>
                 </div>
                 <div class="itemCardSholder">
 
                 </div>
-
-                <!-- tag -->
-                <!-- <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
-                    <div class="itemCardTag">
-                        <input type="text" value="taglocalChangeField">
-                    </div>
-                    <div class="flexAround" *ngFor="let tag of item.tagArray; let i = index">
-                        <button class="itemImageButton material-symbols-outlined"
-                            (click)="localArrayDelete('tagArray',i)" [style]="'background-color:var(--red)'">
-                            <span>delete</span>
-                        </button>
-                        <div class="itemCardTag">
-                            <input type="text" value="taglocalChangeField">
-                        </div>
-                    </div>
-                </div> -->
-                <!-- tag -->
-
-
+                
+                
                 <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-                    <textarea value="{{item.description}}" [style]="'width:100%'"></textarea>
+                    <textarea 
+                    (keyup.enter)="localEditField('description',itemCardDescription.value)"
+                    (blur)="localEditField('description',itemCardDescription.value)"
+                    value="{{item.description}}" [style]="'width:100%'" #itemCardDescription></textarea>
                 </div>
+                
+                                <!-- tag -->
+                                <!-- <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
+                                    <div class="itemCardTag">
+                                        <input type="text" value="taglocalChangeField">
+                                    </div>
+                                    <div class="flexAround" *ngFor="let tag of item.tagArray; let i = index">
+                                        <button class="itemImageButton material-symbols-outlined"
+                                            (click)="localArrayDelete('tagArray',i)" [style]="'background-color:var(--red)'">
+                                            <span>delete</span>
+                                        </button>
+                                        <div class="itemCardTag">
+                                            <input type="text" value="taglocalChangeField">
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- tag -->
             </div>
 
 
