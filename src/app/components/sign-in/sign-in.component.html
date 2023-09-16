@@ -1,3 +1,4 @@
+<!-- signed layout -->
 <div class="itemCard" *ngIf="this.authS.user$ |async as user">
     <div class="itemCardHeader flexAround">
         <a>{{user.displayName}}</a>
@@ -12,17 +13,11 @@
     </div>
 
     <div class="keyValue">
-        <div>
-            <img src={{user.photoURL}} id="userImage" alt="img">
-        </div>
-        <div>
-            <h6>Welcome :</h6>
-            <h6> {{user.displayName}}</h6>
-            <h6> {{user.emailVerified}}</h6>
-        </div>
+        <img src={{user.photoURL}} id="userImage" alt="img">
+        <h6> {{user.displayName}}</h6>
     </div>
+
     <div class="itemCardBack">
-        asdasd
     </div>
 </div>
 
@@ -37,50 +32,157 @@
     <div class="itemCardSholder">
     </div>
 
+    <!-- register  -->
     <div class="flexList">
-        <div class="keyValue">
-            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
-                (click)="this.authS.googleSignin()">
-                <span class="material-symbols-outlined ">LogIn</span>
+        <div class=" ">
+            <div class="keyValue ">
+                <a class=" itemCardContent ">E-mail</a>
+                <input type="text" value="" placeholder="{{templateUser.email}}" #regEmail>
+
+                <a class=" itemCardContent ">Password</a>
+                <input type="text" #regPassword>
+
+                <a class=" itemCardContent ">Repreat Password</a>
+                <input type="password" #regPassword2>
+            </div>
+
+            <button [style]="'width:90%; margin:5%;'" *ngIf="(this.authS.authState$ | async) === null"
+                (click)="this.authS.emailRegister(regEmail.value,regPassword.value,regPassword2.value)">
+                Register Now
             </button>
-            <a>Sign-In with Google</a>
         </div>
+    </div>
+
+    <div class="keyValue">
+        <button class="" *ngIf="(this.authS.authState$ | async) === null" (click)="this.authS.googleSignin()">
+            <img [style]="'width: 100%;'"
+                src="https://developers.google.com/static/identity/images/btn_google_signin_dark_normal_web.png">
+            <!-- <span class="material-symbols-outlined ">LogIn</span> -->
+        </button>
+        <p class="itemCardContent">Sign-In with Google</p>
+    </div>
+    <!-- email sign in -->
+    <div class="emailSigninContainer ">
         <div class="keyValue">
-            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
-                (click)="this.authS.facebookSignin()">
-                <span class="material-symbols-outlined ">LogIn</span>
-            </button>
-            <a>Sign-In with Facebook</a>
+            <p class=" itemCardContent ">E-mail</p>
+            <input type="text" #signinEmail>
+            <p class=" itemCardContent ">Password</p>
+            <input type="text" #signinPassword>
         </div>
-        <div class="keyValue">
-            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
-                (click)="this.authS.googleSignin()">
-                <span class="material-symbols-outlined ">LogIn</span>
-            </button>
-            <a>Sign-In with Google</a>
-        </div>
-        <div class="keyValue">
-            <button class="loginButton" *ngIf="(this.authS.authState$ | async) === null"
-                (click)="this.authS.googleSignin()">
-                <span class="material-symbols-outlined ">LogIn</span>
-            </button>
-            <a>Sign-In with Google</a>
-        </div>
+        <button [style]="' margin:5%;'" >Sign In</button>
+    </div>
+    <p [style]="'color:red;'">
+        {{this.authS.serverResponse}}
+    </p>
+
+    <div class="emailLoginContainer">
+
     </div>
 </div>
 
 
-<div class="itemCardHeaderControlBar" *ngIf="this.authS.user$==null">
-    <button (click)="this.authS.googleSignin()">GoogleLogin</button>
-</div>
 
-<div class="page" id="loginpageContainer">
-    <div class="displayblock" *ngIf="(this.authS.authState$ | async) as user">
-        <div class="displayHeader">
-            <h6>{{user.displayName}}</h6>
-        </div>
-        <div class="displayBoard">
-            <h6>Welcome : {{user.email}}</h6>
-        </div>
-    </div>
-</div>
+<style>
+    .emailSigninContainer {
+        display: flex;
+        flex-direction: column;
+        padding: 5%;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    i .house-info {
+        --_br: 1rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr auto 1fr;
+        max-width: 25rem;
+        position: relative;
+    }
+
+    .house-image {
+        grid-row: 1 / 3;
+        grid-column: 1 / 3;
+        overflow: hidden;
+        /* border-radius: var(--_br); */
+    }
+
+    .house-image::before,
+    .house-image::after,
+    .house-price::after {
+        --_size: var(--_br);
+        content: "";
+        position: absolute;
+        width: var(--_size);
+        aspect-ratio: 1;
+        background-image: radial-gradient(circle at 100% 100%,
+                transparent var(--_size),
+                var(--_corner-color, var(--seaSick)) calc(var(--_size) + 0px));
+        rotate: -90deg;
+    }
+
+    .house-image::before {
+        left: 0;
+        bottom: 0;
+        grid-column: 2;
+        grid-row: 2 / 3;
+    }
+
+    .house-image::after {
+        left: 0;
+        bottom: 0;
+        grid-column: 1;
+        grid-row: 1 / 2;
+        /* box-shadow: -1rem 0 0 white; */
+    }
+
+    .house-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .house-price {
+        display: grid;
+        padding: 1rem 1rem 0 1rem;
+        background: black;
+        font-weight: 500;
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+        border-radius: var(--_br) var(--_br) 0 0;
+        box-shadow: 0 1rem 0 black;
+    }
+
+    .house-price::after {
+        --_size: calc(var(--_br) * 1.5);
+        --_corner-color: black;
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        left: -1rem;
+        bottom: -1rem;
+    }
+
+    .house-price span {
+        display: grid;
+        place-items: center;
+        background: white;
+        padding: 0.75rem 0;
+        border-radius: calc(var(--_br) / 2);
+    }
+
+    .house-meta {
+        margin: 0;
+        background: black;
+        color: white;
+        grid-row: 3 / 4;
+        grid-column: 1 / 3;
+        font-size: 1.25rem;
+        line-height: 1.8;
+        padding-top: 1rem;
+        border-radius: 0 var(--_br) var(--_br) var(--_br);
+    }
+</style>

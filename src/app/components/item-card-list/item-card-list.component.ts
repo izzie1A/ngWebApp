@@ -17,6 +17,8 @@ export class ItemCardListComponent {
   firestore: Firestore = inject(Firestore);
   item$: Observable<any[]> | undefined;
   collectionArray: any[] = ['loreamFolder','test','cities'];
+
+  
   constructor(private fbS: FirebaseControlService) {
     this.address = this.collectionArray[0]
     this.item$ = collectionData(collection(this.firestore, this.address));

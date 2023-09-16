@@ -238,8 +238,11 @@ html {
 }
 
 .itemCardContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-size: var(--context);
-}
+  padding-left: 1%;}
 
 .itemCardKeyValue {
   font-size: var(--keyValue);
@@ -247,7 +250,7 @@ html {
 
 .itemCardBack {
   width: 100%;
-  min-height: 80px;
+  /* min-height: 80px; */
   background-color: var(--seaSick);
 }
 
@@ -308,6 +311,8 @@ html {
 .flexList {
   display: flex;
   flex-direction: column;
+
+  padding: 2%;
 }
 
 .itemImageButton {
