@@ -10,6 +10,7 @@ import { FileControlComponent } from './components/slides/file-control/file-cont
 
 
 const routes: Routes = [
+  { path: '', component: HomePageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'setting', component: SettingComponent },
   { path: 'profile', component: ProfileComponent },

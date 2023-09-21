@@ -32,7 +32,7 @@
             <img [src]="item.posterImage" class="itemImageFrameImage">
         </div>
 
-        <div class="itemCardHeader flexAround">
+        <div class="itemCardHeader ">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
@@ -64,7 +64,7 @@
 
     <!-- edit -->
     <div *ngIf="itemCardMode=='edit'">
-        <div class="itemCardHeader flexAround">
+        <div class="itemCardHeader ">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
@@ -96,12 +96,13 @@
 
 
         <div class="itemCardBody">
+            <!-- imgArray -->
             <div>
                 <input class="fileInput" type="file"
                     (change)="onFileArrayPush( 'loreamFolder/','imageArray',imageArrayInput)" #imageArrayInput>
 
-                <div class="itemCardImageFrameList">
-                    <div *ngFor="let x of item.imageArray; let i = index" class="itemImageFrame" class="itemImageFrame">
+                <div class="itemCardGridList ">
+                    <div *ngFor="let x of item.imageArray; let i = index" class="itemImageFrame " >
                         <img [src]="x" class="itemImageFrameImage">
                         <div class="imageFramePannel">
                             <button class="material-symbols-outlined upload-btn-wrapper itemImageButton"
@@ -132,32 +133,32 @@
                             <input class="fileInput" type="file"
                                 (change)="onFileEdit( 'loreamFolder/','posterImage',posterInput)" #posterInput>
                         </button>
-                        <button class="itemImageButton material-symbols-outlined" (click)="onFileClear('','posterImage')"
+                        <button class="itemImageButton material-symbols-outlined"
+                            (click)="onFileClear('','posterImage')"
                             [style]="'background-color:var(--red); color:var(--seaSick);'">
                             <span>clear</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="itemCardHeader flexAround">
+                <div class="itemCardHeader ">
                     <input (keyup.enter)="localEditField('name',itemCardName.value)"
-                    (blur)="localEditField('name',itemCardName.value)"
-                    type="text" value="{{item.name}}" #itemCardName>
+                        (blur)="localEditField('name',itemCardName.value)" type="text" value="{{item.name}}"
+                        #itemCardName>
                 </div>
                 <div class="itemCardSholder">
 
                 </div>
-                
-                
+
+
                 <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-                    <textarea 
-                    (keyup.enter)="localEditField('description',itemCardDescription.value)"
-                    (blur)="localEditField('description',itemCardDescription.value)"
-                    value="{{item.description}}" [style]="'width:100%'" #itemCardDescription></textarea>
+                    <textarea (keyup.enter)="localEditField('descirption',itemCardDescription.value)"
+                        (blur)="localEditField('descirption',itemCardDescription.value)" value="{{item.description}}"
+                        [style]="'width:100%'" #itemCardDescription></textarea>
                 </div>
-                
-                                <!-- tag -->
-                                <!-- <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
+
+                <!-- tag -->
+                <!-- <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
                                     <div class="itemCardTag">
                                         <input type="text" value="taglocalChangeField">
                                     </div>
@@ -171,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div> -->
-                                <!-- tag -->
+                <!-- tag -->
             </div>
 
 

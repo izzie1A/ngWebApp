@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
   navbarGidContainer:any = [];
+  navBarExpenableContainerArray:any = [];
   navExpanded = false;
   navHeight = '0px';
 
@@ -26,12 +27,34 @@ export class NavBarComponent {
       profile,
       // defaultLink,
     ];
+    this.navBarExpenableContainerArray = [
+      home,
+      firebase,
+      search,
+      profile,
+      home,
+      firebase,
+      search,
+      profile,
+      home,
+      firebase,
+      search,
+      profile,
+      home,
+      firebase,
+      search,
+      profile,
+      // defaultLink,
+    ];
   }
 
-  expanNavbar(){
-    this.navHeight = this.navExpanded ? '0vh' : '20vh';
+  expanNavbar(navBarExpenableContainerArrayRef:HTMLElement){
+    this.navHeight = this.navExpanded ? '0vh' : 'auto';
     this.navExpanded = this.navExpanded ? false : true;
+    // navBarExpenableContainerArrayRef.style.height = this.navHeight;
+    navBarExpenableContainerArrayRef.classList.toggle("navBarExpenableContainerChange");
   }
+
   myFunction(inputDiv: any) {
     inputDiv.classList.toggle("change");
   }

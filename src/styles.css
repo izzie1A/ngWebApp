@@ -21,27 +21,40 @@
   --histarri: var(--yellow);
 
   --title: 24px;
-  --context: 12px;
-  --keyValue: 9px;
+  --context: 15px;
+  --keyValue: 12px;
+
+  --screenS: 700px;
+  --screenM: 1200px;
+  --screenL: 2000px;
+
+  --imgS: 12px;
+  --imgM: 120px;
+  --imgL: 240px;
+
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: var(--screenS)) {
   :root {
     --title: 12px;
-    --context: 9px;
-    --keyvalue: 6px;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  :root {
-    --title: 24px;
     --context: 12px;
     --keyvalue: 9px;
   }
+
+  .itemImageFrame {
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+  }
 }
 
-
+@media only screen and (min-width: var(--screenM)) {
+  :root {
+    --title: 24px;
+    --context: 15px;
+    --keyvalue: 12px;
+  }
+}
 
 body,
 html {
@@ -68,27 +81,37 @@ html {
   position: relative;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   border-radius: 1vmin;
-  margin: 5%;
   overflow: hidden;
 
   animation-duration: 4s;
   background-color: var(--seaSick);
+  color: var(--dark);
+
+  margin: 2.5%;
+
+  transition: 0.25s, width 0s;
 }
 
 
-
-
+/* itemCardHeader */
 .itemCardHeader {
   background-color: var(--main);
   color: white;
   padding: 2%;
   color: var(--white);
+
+  display: grid;
+  grid-template-columns: 0.60fr 0.4fr;
+  align-items: center;
+  justify-content: space-between;
 }
-.itemCardHeaderTitle{
-  width: 69%;
+
+.itemCardHeaderTitle {
+  /* width: 69%; */
   overflow: hidden;
-  /* text-overflow: ellipsis; */
+  text-overflow: ellipsis;
 }
+
 .itemCardControlBar {
   display: flex;
   justify-content: space-evenly;
@@ -117,15 +140,6 @@ html {
   align-items: center;
 }
 
-.itemCardImageFrameList {
-  display: flex;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 2%;
-  justify-content: space-around;
-
-}
-
 .itemImageFrame {
   height: 120px;
   width: 120px;
@@ -135,11 +149,9 @@ html {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-
+  margin: 1%;
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
-
-
 
 .itemImageFrameImage {
   width: 100%;
@@ -156,11 +168,11 @@ html {
 }
 
 .itemCardImagePosterFrame {
-  /* height: 120px; */
-  min-height: 120px;
+  height: 120px;
+  /* min-height: 120px;
   max-height: 60vh;
   min-width: 120px;
-  max-width: 90vw;
+  max-width: 90vw; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,11 +259,28 @@ html {
   justify-content: flex-start;
   align-items: center;
   font-size: var(--context);
-  padding-left: 1%;}
+  padding-left: 1%;
+}
 
 .itemCardKeyValue {
   font-size: var(--keyValue);
 }
+
+.itemCardGridList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 2%;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+
+  max-height: var(--imgL);
+}
+
+
+/* backend */
 
 .itemCardBack {
   width: 100%;
@@ -261,13 +290,13 @@ html {
 
 .itemCardBack:before {
   content: "";
-  position:absolute;
-  top:-40px;
-  left:0;
-  height:40px;
+  position: absolute;
+  top: -40px;
+  left: 0;
+  height: 40px;
   width: 40px;
   border-bottom-left-radius: 50%;
-  background:#000;
+  background: #000;
 }
 
 /* file upload */
@@ -314,35 +343,24 @@ html {
 }
 
 .flexList {
-  display: flex;
-  flex-direction: column;
-
-  padding: 2%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  padding: 2% !important;
 }
 
+/* image */
 .itemImageButton {
   border-radius: 5px;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px !important;
   color: var(--dark);
+  font-size: var(--context) !important;
 }
 
-@media only screen and (min-width: 700px) {
-  .itemImageButton {
-    font-size: 12px !important;
-  }
-
-  .itemImageFrame {
-    height: 60px;
-    width: 60px;
-    border-radius: 5px;
-  }
-}
-
-@media only screen and (min-width: 1000px) {}
 
 /* CSS button */
 .itemImageButton {
@@ -399,7 +417,12 @@ html {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
+
+
+
 /* 
+
+
 * {
   background-color: rgba(255, 0, 0, 0.1);
 }
