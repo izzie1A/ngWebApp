@@ -24,7 +24,11 @@ import { HomePageComponent } from './components/slides/home-page/home-page.compo
 import { SettingComponent } from './components/slides/setting/setting.component';
 import { FileControlComponent } from './components/slides/file-control/file-control.component';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
+
+// import { Three } from 'three'
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,8 @@ import { FileControlComponent } from './components/slides/file-control/file-cont
     ItemCardViewerComponent,
   ],
   imports: [
+    MatToolbarModule,
+    MatIconModule,
     BrowserModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
