@@ -1,18 +1,49 @@
-<div class="threeJsSearchBar itemCard">
-    <input class="searchBarInput" type="text" placeholder="Search">
-    <button class="searchBarButton">
-        <span class="material-symbols-outlined">
-            search
-        </span>
-    </button>
+<div class="itemCard">
+    <div class="itemCardHeader">
+        <div class="threeJsSearchBar">
+            <input class="searchBarInput" type="text" placeholder="Search">
+            <button class="searchBarButton">
+                <span class="material-symbols-outlined ">
+                    search
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="itemCardSholder">
+        <a class="itemCardContent">a</a>
+    </div>
+    <div class="itemCardBody">
+    </div>
 </div>
 
 
+<div class="content-wrapper">
+    <div class="container-wrapper">
+        <div class="container">
+            <h2>Backlog</h2>
 
-<mat-toolbar color="primary">
-    <mat-icon>local_fire_department</mat-icon>
-    <span>Kanban Fire</span>
-</mat-toolbar>
+            <div cdkDropList id="todo" #doneList="cdkDropList" [cdkDropListData]="todo"
+                [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
+                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
+                <app-item-card-detail (edit)="editTask('todo', $event)" *ngFor="let task of todo" [task]="task"></app-item-card-detail>
+            </div>
+            
+            <div cdkDropList id="todo" #doneList="cdkDropList" [cdkDropListData]="todo"
+                [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
+                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
+                <app-item-card-detail (edit)="editTask('todo', $event)" *ngFor="let task of todo" [task]="task"></app-item-card-detail>
+            </div>
+
+            <div cdkDropList id="todo" #inProgressList="cdkDropList" [cdkDropListData]="todo"
+                [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
+                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
+                <app-item-card-detail (edit)="editTask('todo', $event)" *ngFor="let task of todo" [task]="task"></app-item-card-detail>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <!-- 
 <iframe width="100%" height="85%" style="border:0" loading="lazy" allowfullscreen
     referrerpolicy="no-referrer-when-downgrade" 
@@ -29,7 +60,10 @@ s-->
         border-radius: 500px;
         display: flex;
 
-        /* width: 60%; */
+        height: 10vh;
+        overflow: hidden;
+
+        box-shadow: var(--boxShadow);
     }
 
     .searchBarInput {

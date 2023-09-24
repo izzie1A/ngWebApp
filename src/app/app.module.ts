@@ -26,7 +26,11 @@ import { FileControlComponent } from './components/slides/file-control/file-cont
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
+import { ItemCardDetailComponent } from './item-card-detail/item-card-detail.component';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // import { Three } from 'three'
 @NgModule({
@@ -44,12 +48,15 @@ import { MatIconModule } from '@angular/material/icon';
     FileControlComponent,
     ImageViewerComponent,
     ItemCardViewerComponent,
+    ItemCardDetailComponent,
   ],
   imports: [
     MatToolbarModule,
     MatIconModule,
+    MatCardModule,
     BrowserModule,
     AppRoutingModule,
+    DragDropModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
