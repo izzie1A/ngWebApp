@@ -17,35 +17,22 @@ export class NavBarComponent {
     let home: navBarItem = {dir:'home',iconName:'home'};
     let firebase: navBarItem = {dir:'firebase',iconName:'folder'};
     let search: navBarItem = {dir:'search',iconName:'search'};
-    let defaultLink: navBarItem = {dir:'',iconName:'lan'};
     let profile: navBarItem = {dir:'profile',iconName:'login'};
+    let defaultLink: navBarItem = {dir:'ss',iconName:'lan'};
 
+    this.navBarExpenableContainerArray.push(new navBarItem2('ss','lan'));
+    this.navBarExpenableContainerArray.push(new navBarItem2('home/name','new'));
+ 
+    // this.navBarExpenableContainerArray.push(defaultLink);
+    // this.navBarExpenableContainerArray.push(profile);
     this.navbarGidContainer = [
       home,
       firebase,
       search,
       profile,
-      // defaultLink,
     ];
-    this.navBarExpenableContainerArray = [
-      home,
-      firebase,
-      search,
-      profile,
-      home,
-      firebase,
-      search,
-      profile,
-      home,
-      firebase,
-      search,
-      profile,
-      home,
-      firebase,
-      search,
-      profile,
-      // defaultLink,
-    ];
+
+
   }
 
   expanNavbar(navBarExpenableContainerArrayRef:HTMLElement){
@@ -71,4 +58,13 @@ export class NavBarComponent {
 export interface navBarItem{
   dir:string;
   iconName:string;
+}
+
+class navBarItem2{
+  dir:string;
+  iconName:string;
+  constructor(dir:string,iconName:string){
+    this.dir = dir;
+    this.iconName = iconName;
+  }
 }

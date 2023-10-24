@@ -5,10 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
+
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+
+
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemCardListComponent } from './components/item-card-list/item-card-list.component';
 
@@ -28,9 +32,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
-import { ItemCardDetailComponent } from './item-card-detail/item-card-detail.component';
+import { ItemCardDetailComponent } from './components/item-card-detail/item-card-detail.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NotFoundComponent } from './components/slides/not-found/not-found.component';
+import { SearchPageComponent } from './components/slides/search-page/search-page.component';
 
 // import { Three } from 'three'
 @NgModule({
@@ -42,13 +48,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     SignInComponent,
     MapViewerComponent,
     ProfileComponent,
-    ThreeJsComponent,
     HomePageComponent,
     SettingComponent,
     FileControlComponent,
     ImageViewerComponent,
     ItemCardViewerComponent,
     ItemCardDetailComponent,
+    NotFoundComponent,
+    SearchPageComponent,
   ],
   imports: [
     MatToolbarModule,
@@ -57,6 +64,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
+    FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

@@ -32,7 +32,7 @@ export class AuthService {
         console.log(aUser.email);
         this.storeUser = aUser;
       } else if(aUser == null){
-        console.log(aUser);
+        console.log('No user login');
         this.storeUser = this.fakeUser;
       };
     })  
@@ -102,6 +102,7 @@ export class AuthService {
         this.serverResponse = error.code;
       });
   }
+  // facebook not yet verify
   facebookSignin() {
     const provider = new FacebookAuthProvider();
     signInWithPopup(this.auth, provider)
@@ -119,14 +120,11 @@ export class AuthService {
         console.log(error)
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.customData.email;
-        // The AuthCredential type that was used.
         const credential = FacebookAuthProvider.credentialFromError(error);
-
-        // ...
       });
   }
+
   gitHUbSignin() {
     const provider = new GithubAuthProvider();
     signInWithPopup(this.auth, provider)

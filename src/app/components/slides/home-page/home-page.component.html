@@ -1,4 +1,6 @@
 <!-- <app-item-card *ngFor="let x of item$|async" [item]="item$"></app-item-card> -->
+<router-outlet></router-outlet>
+
 <div class="homePageScroller">
     <app-item-card-viewer *ngFor="let x of item$|async" [item]="x"></app-item-card-viewer>
 </div>

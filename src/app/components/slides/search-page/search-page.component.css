@@ -2,9 +2,13 @@
     position: relative;
     background-color: red;
     height: 100px;
+    width: 100px;
 }
 .sinDot{
     position: absolute;
     background-color: blue;
-    height: 10px;
+    /* height: 10px;
+    width: 10px; */
+    height: 10%;
+    /* width: 10%; */
 }

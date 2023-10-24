@@ -13,37 +13,35 @@
         <a class="itemCardContent">a</a>
     </div>
     <div class="itemCardBody">
+        aasd
     </div>
 </div>
 
+<label for="points" #as>Points (between 0 and 10):</label>
+<input type="range"  id="points" name="points" mi0n="0" max="10"  #xx>
+{{xx.value}}
 
-<div class="content-wrapper">
-    <div class="container-wrapper">
-        <div class="container">
-            <h2>Backlog</h2>
 
-            <div cdkDropList id="todo" #doneList="cdkDropList" [cdkDropListData]="todo"
-                [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
-                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
-                <app-item-card-detail (edit)="editTask('todo', $event)" *ngFor="let task of todo" [task]="task"></app-item-card-detail>
-            </div>
-            
-            <div cdkDropList id="todo" #doneList="cdkDropList" [cdkDropListData]="todo"
-                [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
-                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
-                <app-item-card-detail (edit)="editTask('todo', $event)" *ngFor="let task of todo" [task]="task"></app-item-card-detail>
-            </div>
 
-            <div cdkDropList id="todo" #inProgressList="cdkDropList" [cdkDropListData]="todo"
-                [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
-                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
-                <app-item-card-detail (edit)="editTask('todo', $event)" *ngFor="let task of todo" [task]="task"></app-item-card-detail>
-            </div>
+<input [disabled]="condition ? true : false">
+<input [attr.disabled]="condition ? 'disabled' : null">
+<button disabled>Test Button</button>
 
-        </div>
-    </div>
+<div class="itemCard" cdkDragLockAxis="y" cdkDrag>
+    I can only be dragged up/down
+</div>
+<div class="itemCard" cdkDragLockAxis="x" cdkDrag>
+    I can only be dragged left/right
 </div>
 
+
+<div>
+    {{counter}}
+    {{sinWave[sinWave.length-1]}}
+</div>
+<div class="sinWave" [style.height]="sinHeight.toString()">
+    <div class="sinDot" [style]="ss">s</div>
+</div>
 <!-- 
 <iframe width="100%" height="85%" style="border:0" loading="lazy" allowfullscreen
     referrerpolicy="no-referrer-when-downgrade" 
@@ -54,7 +52,6 @@ s-->
 
 <style>
     .threeJsSearchBar {
-        /* position: absolute; */
         left: 0;
         top: 0;
         border-radius: 500px;

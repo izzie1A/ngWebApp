@@ -1,7 +1,20 @@
-<div class="itemCard">
+<div class="">
     <!-- view -->
     <div *ngIf="itemCardMode=='view'">
-        <div class="itemCardImagePosterFrame">
+        <div class="itemCardBody itemCardViewGrid">
+            <div></div>
+            <div class="itemImageFrame">
+                <img src="{{item.posterImage}}" class="itemImageFrameImage">
+            </div>
+            <a class="itemCardTitle">{{item.name}}</a>
+
+            <div></div>
+
+            <button class="itemButton" (click)="itemCardModeSwitch('edit')">
+                <span class="material-symbols-outlined "> edit</span>
+            </button>
+        </div>
+        <!-- <div class="itemCardImagePosterFrame">
             <img src="{{item.posterImage}}" class="itemImageFrameImage">
         </div>
 
@@ -21,18 +34,16 @@
                     <span> edit </span>
                 </button>
             </div>
-        </div>
-
+        </div> -->
     </div>
+
 
 
     <!-- viewDetail -->
     <div *ngIf="itemCardMode=='viewDetail'">
-        <div class="itemCardImagePosterFrame">
-            <img [src]="item.posterImage" class="itemImageFrameImage">
-        </div>
 
-        <div class="itemCardHeader ">
+
+        <div class="itemCardHeader flexAround">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
@@ -50,21 +61,21 @@
         </div>
 
         <div class="itemCardSholder">
-            <!-- <div class="itemCardTagList">
-                <div class="itemCardTag" *ngFor="let tag of item.tagArray">{{tag}}</div>
-            </div> -->
-
             <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
                 <a>{{item.description}}</a>
             </div>
         </div>
 
-
+        <div class="itemCardImagePosterFrame">
+            <img [src]="item.posterImage" class="itemImageFrameImage">
+        </div>
     </div>
+
+
 
     <!-- edit -->
     <div *ngIf="itemCardMode=='edit'">
-        <div class="itemCardHeader ">
+        <div class="itemCardHeader flexAround">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
                 <button class="material-symbols-outlined itemImageButton" [style]="'background-color:var(--green)'"
@@ -79,30 +90,34 @@
                     <span> edit </span>
                 </button>
             </div>
+            <div>
+                <button class="itemCardKeyValue" (click)="this.firebaseS.deleteDoc(address,item.id)"
+                    [style]="'color:var(--dark);'" [style]="'background-color:var(--red);color:var(--seaSick);'">
+                    <span class="material-symbols-outlined"> delete </span>
+                    delete
+                </button>
+                <button class="itemCardKeyValue" (click)="this.firebaseS.docSave(address,item.id,item)"
+                    [style]="'color:var(--dark);'" [style]="'background-color:var(--green)'">
+                    <span class="material-symbols-outlined"> save </span>
+                    save
+                </button>
+            </div>
         </div>
 
         <div class="itemCardSholder">
-            <button class="itemCardKeyValue" (click)="this.firebaseS.docSave(address,item.id,item)"
-                [style]="'color:var(--dark);'" [style]="'background-color:var(--green)'">
-                <span class="material-symbols-outlined"> save </span>
-                save
-            </button>
-            <button class="itemCardKeyValue" (click)="this.firebaseS.deleteDoc(address,item.id)"
-                [style]="'color:var(--dark);'" [style]="'background-color:var(--red);color:var(--seaSick);'">
-                <span class="material-symbols-outlined"> delete </span>
-                delete
-            </button>
         </div>
 
 
         <div class="itemCardBody">
             <!-- imgArray -->
+
             <div>
                 <input class="fileInput" type="file"
-                    (change)="onFileArrayPush( 'loreamFolder/','imageArray',imageArrayInput)" #imageArrayInput>
+                    (change)="onFileArrayPush( 'loreamFolder/','imageArray',imageArrayInput)" multiple #imageArrayInput>
 
                 <div class="itemCardGridList ">
-                    <div *ngFor="let x of item.imageArray; let i = index" class="itemImageFrame " >
+                    <div *ngFor="let x of item.imageArray; let i = index" class="itemImageFrame"
+                        [style.width]="'var(--imgM)'" [style.height]="'var(--imgM)'">
                         <img [src]="x" class="itemImageFrameImage">
                         <div class="imageFramePannel">
                             <button class="material-symbols-outlined upload-btn-wrapper itemImageButton"
@@ -123,7 +138,9 @@
             </div>
 
 
-            <div class="itemCard">
+
+
+            <!-- <div class="itemCard">
                 <div class="itemCardImagePosterFrame">
                     <img [src]="item.posterImage" class="itemImageFrameImage">
                     <div class="imageFramePannel">
@@ -157,32 +174,30 @@
                         [style]="'width:100%'" #itemCardDescription></textarea>
                 </div>
 
-                <!-- tag -->
-                <!-- <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
-                                    <div class="itemCardTag">
-                                        <input type="text" value="taglocalChangeField">
-                                    </div>
-                                    <div class="flexAround" *ngFor="let tag of item.tagArray; let i = index">
-                                        <button class="itemImageButton material-symbols-outlined"
-                                            (click)="localArrayDelete('tagArray',i)" [style]="'background-color:var(--red)'">
-                                            <span>delete</span>
-                                        </button>
-                                        <div class="itemCardTag">
-                                            <input type="text" value="taglocalChangeField">
-                                        </div>
-                                    </div>
-                                </div> -->
-                <!-- tag -->
-            </div>
-
+                <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
+                    <div class="itemCardTag">
+                        <input type="text" value="taglocalChangeField">
+                    </div>
+                    <div class="flexAround" *ngFor="let tag of item.tagArray; let i = index">
+                        <button class="itemImageButton material-symbols-outlined"
+                            (click)="localArrayDelete('tagArray',i)" [style]="'background-color:var(--red)'">
+                            <span>delete</span>
+                        </button>
+                        <div class="itemCardTag">
+                            <input type="text" value="taglocalChangeField">
+                        </div>
+                    </div>
+                </div> 
+            </div> -->
 
 
         </div>
-
     </div>
 
+
+
     <!-- edit keyValue-->
-    <div class="itemCard" *ngIf="itemCardMode=='keyValue'">
+    <!-- <div class="itemCard" *ngIf="itemCardMode=='keyValue'">
         <div class="itemCardHeader">
             <div>
                 <button class="itemImageButton">
@@ -220,5 +235,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

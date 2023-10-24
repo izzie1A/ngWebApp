@@ -7,6 +7,7 @@
             {{nav.iconName}}
         </span>
     </button>
+
     <button class="navBarButton hClick " (click)="expanNavbar(navBarExpenableContainer)"
         (click)="myFunction(hamburgerIconDiv)" #hamburgerIconDiv>
         <div>
@@ -16,15 +17,17 @@
         </div>
     </button>
 </nav>
+
 <div class="navBarExpenableContainer" #navBarExpenableContainer>
-    <button *ngFor="let nav of navBarExpenableContainerArray" class="hClick flexList "  (click)="self(navButton)"  routerLink="/{{nav.dir.toString()}}">
-        <div class="navBarButton  " #navButton>
+    <button *ngFor="let nav of navBarExpenableContainerArray" class="hClick flexList " (click)="self(navButton)"
+        routerLink="/{{nav.dir.toString()}}">
+
+        <button class="itemCardKeyValue" [style]="''" #navButton>
+            <p>{{nav.iconName}}</p>
             <span class="material-symbols-outlined ">
                 {{nav.iconName}}
             </span>
-        </div>
-        <a class="itemCardKeyValue" [style]="'color:var(--seaSick)'">
-            {{nav.iconName}}
-        </a>
+        </button>
+
     </button>
 </div>

@@ -15,32 +15,32 @@ export class ItemCardListComponent {
   @Input() collection: any;
 
   firestore: Firestore = inject(Firestore);
+
   item$: Observable<any[]> | undefined;
+
   collectionArray: any = [];
+  user:any;
+  itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'view';
 
-
-  constructor(private fbS: FirebaseControlService, private afs:AuthService) {
+  constructor(private fbS: FirebaseControlService, private afs: AuthService) {
     // this.address = 'loreamFolder/'+'personalFolder/'+this.afs.getUserID()
     this.address = 'loreamCollection';
-
-    
-
     this.item$ = collectionData(collection(this.firestore, this.address));
 
-    // let home = {displayName:'Home',address:'loreamFolder/'+'personalFolder/'+ this.afs.getUserID()}
-    let test = {displayName:'test',address:'test'}
-    let cities = {displayName:'cities',address:'cities'}
-    let publicRoll = {displayName:'loreamCollection',address:'loreamCollection'}
-    this.collectionArray = [test,cities,publicRoll];
-  }
-  
-  async initialCollection(){
+    let x = this.fbS.queryCondition("cities", "name", "!=", 'true');
+    console.log(x);
+
+    this.collectionArray.push(new ItemCardListItem('Home', 'loreamFolder/'+'personalFolder/'+ this.afs.getUserID()));
+    this.collectionArray.push(new ItemCardListItem('Home', 'cities'));
+    this.collectionArray.push(new ItemCardListItem('test', 'test'));
+    this.collectionArray.push(new ItemCardListItem('loreamCollection', 'citiesloreamCollection'));
   }
 
   createEmpty() {
     let fakerUid = faker.datatype.uuid();
     let imgUrl = 'https://picsum.photos/200/300'
-    let price =faker.commerce.price()
+    let price = faker.commerce.price()
+
     let emptyObj = {
       createTime: Date.now(),
       id: fakerUid,
@@ -48,9 +48,9 @@ export class ItemCardListComponent {
       description: faker.commerce.productDescription(),
       price: price,
       fileArray: [],
-      tagArray: [price,faker.commerce.productAdjective(), faker.commerce.productAdjective(), faker.commerce.productMaterial()],
+      tagArray: [price, faker.commerce.productAdjective(), faker.commerce.productAdjective(), faker.commerce.productMaterial()],
       imageArray: [imgUrl],
-      posterImage:imgUrl,
+      posterImage: imgUrl,
     }
     this.fbS.createDoc(this.address, emptyObj.id, emptyObj);
   }
@@ -59,5 +59,44 @@ export class ItemCardListComponent {
     this.address = address;
     const itemCollection = collection(this.firestore, this.address);
     this.item$ = collectionData(itemCollection);
+  }
+  switchViewmode() {
+    this.itemCardMode == 'viewDetail' ? this.itemCardMode = 'view' : this.itemCardMode = 'viewDetail';
+  }
+
+}
+
+interface firebaseObj {
+  image: string;
+  imageArray: string[];
+  file: string;
+  description: string;
+  save(a: string): void;
+}
+interface file {
+
+}
+
+class tes implements file {
+  id: string = '';
+  name: string = '';
+  createTime: number;
+  constructor(id: string, name: string) {
+    this.createTime = Date.now();
+    this.name = name;
+    this.id = id;
+  }
+  save() { }
+}
+
+class ItemCardListItem {
+  displayName: string = '';
+  address: string = '';
+  constructor(
+    displayName: string,
+    address: string,
+  ) {
+    this.address = address;
+    this.displayName = displayName;
   }
 }

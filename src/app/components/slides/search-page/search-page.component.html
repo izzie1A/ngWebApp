@@ -1,0 +1,15 @@
+<p>search-page works!</p>
+<!-- {{timeCounter}} -->
+<div>
+    canvas
+    <input type="range" [(ngModel)]="blendValue" min="0.001" max="0.1" step="0.001">
+    <p>Blended Value: {{blendValue}}</p>
+
+    <div>
+        <div class="sinWave" [style.height]="sinHeight.toString()" [style.margin]="'2.5%'">
+            <div class="sinDot" [style]="sStyle">A</div>
+        </div>
+    </div>
+
+
+</div>
