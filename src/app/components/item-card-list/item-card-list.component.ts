@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from "src/app/services/auth.service";
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, query, limit } from '@angular/fire/firestore';
 import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
 import { faker } from '@faker-js/faker';
 
@@ -17,23 +17,28 @@ export class ItemCardListComponent {
   firestore: Firestore = inject(Firestore);
 
   item$: Observable<any[]> | undefined;
+  itemArray: any = [];
 
   collectionArray: any = [];
-  user:any;
+  user: any;
   itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'view';
 
   constructor(private fbS: FirebaseControlService, private afs: AuthService) {
-    // this.address = 'loreamFolder/'+'personalFolder/'+this.afs.getUserID()
     this.address = 'loreamCollection';
     this.item$ = collectionData(collection(this.firestore, this.address));
+    // this.item$ = this.fbS.getCollection(this.address);
 
-    let x = this.fbS.queryCondition("cities", "name", "!=", 'true');
-    console.log(x);
+    this.initialize();
 
-    this.collectionArray.push(new ItemCardListItem('Home', 'loreamFolder/'+'personalFolder/'+ this.afs.getUserID()));
+    this.collectionArray.push(new ItemCardListItem('Home', 'loreamFolder/' + 'personalFolder/' + this.afs.getUserID()));
     this.collectionArray.push(new ItemCardListItem('Home', 'cities'));
     this.collectionArray.push(new ItemCardListItem('test', 'test'));
     this.collectionArray.push(new ItemCardListItem('loreamCollection', 'citiesloreamCollection'));
+  }
+  async initialize() {
+    let x = await this.fbS.queryCondition("cities", 3, "name", "!=", 'true');
+    console.log(x);
+    this.itemArray = x;
   }
 
   createEmpty() {

@@ -3,6 +3,7 @@ import { Firestore, collectionData, collection, updateDoc, getDocFromCache, dele
 import { DocumentData, WhereFilterOp, addDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, where } from "firebase/firestore";
 // import { getStorage, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Storage, getStorage, provideStorage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,36 +14,6 @@ export class FirebaseControlService {
 
   firebaseServerResponse: any;
   constructor() {
-    this.t();
-  }
-
-  async t() {
-    const citiesRef = collection(this.firestore, "cities");
-    await setDoc(doc(citiesRef, "SF"), {
-      name: "San Francisco", state: "CA", country: "USA",
-      capital: false, population: 860000,
-      regions: ["west_coast", "norcal"]
-    });
-    await setDoc(doc(citiesRef, "LA"), {
-      name: "Los Angeles", state: "CA", country: "USA",
-      capital: false, population: 3900000,
-      regions: ["west_coast", "socal"]
-    });
-    await setDoc(doc(citiesRef, "DC"), {
-      name: "Washington, D.C.", state: null, country: "USA",
-      capital: true, population: 680000,
-      regions: ["east_coast"]
-    });
-    await setDoc(doc(citiesRef, "TOK"), {
-      name: "Tokyo", state: null, country: "Japan",
-      capital: true, population: 9000000,
-      regions: ["kanto", "honshu"]
-    });
-    await setDoc(doc(citiesRef, "BJ"), {
-      name: "Beijing", state: null, country: "China",
-      capital: true, population: 21500000,
-      regions: ["jingjinji", "hebei"]
-    });
   }
 
   async createDoc(address: string, id: string, content: any) {
@@ -70,7 +41,6 @@ export class FirebaseControlService {
     await deleteDoc(doc(this.firestore, address, id));
     await console.log(deleteDoc(doc(this.firestore, address, id)));
   }
-
   async docSave(address: string, id: string, content: any) {
     console.log(address, id, content)
     const docSnap = await getDoc(doc(this.firestore, address, id));
@@ -87,6 +57,12 @@ export class FirebaseControlService {
 
   async setCustomFile() {
 
+  }
+
+  getCollections(address:string){
+    const q = query(collection(this.firestore, address));
+    
+    return
   }
 
   async queryCollection(address: string, condton1: string, condton2: string, condton3: string) {
@@ -109,20 +85,32 @@ export class FirebaseControlService {
   }
 
   async docQueryCollection(collectionID: string, docID: string, name: string) {
+    
 
   }
 
-  async queryCondition(address: string, condton1: string, condton2: WhereFilterOp, condton3: string) {
-    console.log(condton1);
-    const q = query(
-      collection(this.firestore, address),
-      where(condton1, condton2, condton3),
-      orderBy("name"),
-      limit(3));
+  async queryCondition(address: string, amountLimit: number, condton1: string, condton2: WhereFilterOp, condton3: string) {
+    const q = await query(collection(this.firestore, address), orderBy("name"), limit(3));
     const querySnapshot = await getDocs(q);
     let result: DocumentData[] = [];
     querySnapshot.forEach((doc) => {
-      result.push({id: doc.id,data: doc.data()});
+      result.push(doc.data());
+      // result.push({ id: doc.id,data: doc.data()});
+    });
+    return result;
+  }
+
+  async queryCondition2(address: string, amountLimit: number, condton1: string, condton2: WhereFilterOp, condton3: string) {
+    console.log(condton1);
+    const q = await query(
+      collection(this.firestore, address),
+      where(condton1, condton2, condton3),
+      orderBy("name"),
+      limit(amountLimit));
+    const querySnapshot = await getDocs(q);
+    let result: DocumentData[] = [];
+    querySnapshot.forEach((doc) => {
+      result.push({ id: doc.id, data: doc.data() });
     });
     console.log(result);
     return result
@@ -186,6 +174,6 @@ class fItem extends tItem {
   imageArray: string[] = [];
   createTime: number = Date.now();
   constructor(name: string, id: string) {
-    super(name,id); 
+    super(name, id);
   }
 }

@@ -2,7 +2,11 @@
     <!-- view -->
     <div *ngIf="itemCardMode=='view'">
         <div class="itemCardBody itemCardViewGrid">
-            <div></div>
+            <div>
+                <span class="material-symbols-outlined ">
+                    menu
+                </span>
+            </div>
             <div class="itemImageFrame">
                 <img src="{{item.posterImage}}" class="itemImageFrameImage">
             </div>
@@ -75,6 +79,7 @@
 
     <!-- edit -->
     <div *ngIf="itemCardMode=='edit'">
+        
         <div class="itemCardHeader flexAround">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
@@ -110,7 +115,6 @@
 
         <div class="itemCardBody">
             <!-- imgArray -->
-
             <div>
                 <input class="fileInput" type="file"
                     (change)="onFileArrayPush( 'loreamFolder/','imageArray',imageArrayInput)" multiple #imageArrayInput>
@@ -139,57 +143,21 @@
 
 
 
-
-            <!-- <div class="itemCard">
-                <div class="itemCardImagePosterFrame">
-                    <img [src]="item.posterImage" class="itemImageFrameImage">
-                    <div class="imageFramePannel">
-                        <button class="material-symbols-outlined upload-btn-wrapper itemImageButton"
-                            [style]="'background-color:var(--yellow)'">
-                            Upload
-                            <input class="fileInput" type="file"
-                                (change)="onFileEdit( 'loreamFolder/','posterImage',posterInput)" #posterInput>
-                        </button>
-                        <button class="itemImageButton material-symbols-outlined"
-                            (click)="onFileClear('','posterImage')"
-                            [style]="'background-color:var(--red); color:var(--seaSick);'">
-                            <span>clear</span>
-                        </button>
+            <div *ngFor="let y of item | keyvalue; let i = index">
+                <div>
+                    <div class="itemCardKeytValue" *ngIf="editmode!=false">
+                        <div>{{y.key}}</div>
+                        <div>{{y.value}}</div>
                     </div>
-                </div>
-
-                <div class="itemCardHeader ">
-                    <input (keyup.enter)="localEditField('name',itemCardName.value)"
-                        (blur)="localEditField('name',itemCardName.value)" type="text" value="{{item.name}}"
-                        #itemCardName>
-                </div>
-                <div class="itemCardSholder">
-
-                </div>
-
-
-                <div class="itemCardKeyValue" [style]="'color:var(--dark);'">
-                    <textarea (keyup.enter)="localEditField('descirption',itemCardDescription.value)"
-                        (blur)="localEditField('descirption',itemCardDescription.value)" value="{{item.description}}"
-                        [style]="'width:100%'" #itemCardDescription></textarea>
-                </div>
-
-                <div class="itemCardTagList" [style]="'align-items: center; flex-direction: column;'">
-                    <div class="itemCardTag">
-                        <input type="text" value="taglocalChangeField">
-                    </div>
-                    <div class="flexAround" *ngFor="let tag of item.tagArray; let i = index">
-                        <button class="itemImageButton material-symbols-outlined"
-                            (click)="localArrayDelete('tagArray',i)" [style]="'background-color:var(--red)'">
-                            <span>delete</span>
-                        </button>
-                        <div class="itemCardTag">
-                            <input type="text" value="taglocalChangeField">
+                    <div class="itemCardKeytValue">
+                        <div class="itemCardKeytValue">
+                            <div>{{y.key}}</div>
                         </div>
+                        <input (keyup.enter)="localAddField(y.key,itemValue.value)"
+                            (blur)="localAddField(y.key,itemValue.value)" type="text" value="{{y.value}}" #itemValue>
                     </div>
-                </div> 
-            </div> -->
-
+                </div>
+            </div>
 
         </div>
     </div>
