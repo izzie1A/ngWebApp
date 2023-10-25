@@ -7,6 +7,7 @@ import { faker } from '@faker-js/faker';
 import { MatDialog } from '@angular/material/dialog';
 // import { ItemCardDialogComponent, TaskDialogResult } from './../../components/item-card-dialog/item-card-dialog.component';
 import { TaskDialogResult, TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 
 @Component({
@@ -95,6 +96,8 @@ export class ItemCardListComponent {
   switchViewmode() {
     this.itemCardMode == 'viewDetail' ? this.itemCardMode = 'view' : this.itemCardMode = 'viewDetail';
   }
+
+
 
 }
 

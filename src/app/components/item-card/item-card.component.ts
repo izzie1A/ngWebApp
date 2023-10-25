@@ -114,6 +114,8 @@ export class ItemCardComponent {
       };
     }
   }
+
+  
   onFileEdit(address: string, key: any, input: HTMLInputElement) {
     if (!input.files) return
     this.item[key] = 'downloading';
