@@ -38,6 +38,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NotFoundComponent } from './components/slides/not-found/not-found.component';
 import { SearchPageComponent } from './components/slides/search-page/search-page.component';
 
+// angular matreial
+import {MatDialogModule} from '@angular/material/dialog';
+import { ItemCardDialogComponent } from './components/item-card-dialog/item-card-dialog.component';
+
 // import { Three } from 'three'
 @NgModule({
   declarations: [
@@ -56,6 +60,7 @@ import { SearchPageComponent } from './components/slides/search-page/search-page
     ItemCardDetailComponent,
     NotFoundComponent,
     SearchPageComponent,
+    ItemCardDialogComponent,
   ],
   imports: [
     MatToolbarModule,
@@ -65,6 +70,7 @@ import { SearchPageComponent } from './components/slides/search-page/search-page
     AppRoutingModule,
     DragDropModule,
     FormsModule,
+    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

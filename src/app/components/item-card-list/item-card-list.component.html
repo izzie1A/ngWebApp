@@ -25,6 +25,9 @@
         <span class="material-symbols-outlined "> resize</span>
         <p class="itemCardKeyValue">Switch</p>
       </button>
+      <button (click)="test()">
+        test
+      </button>
     </div>
   </div>
 
@@ -71,4 +74,8 @@
       [itemCardMode]="itemCardMode"></app-item-card>
   </div>
 
+  <div >
+    <app-item-card *ngFor=" let x of itemArray" [item]="x" [address]="address"
+      [itemCardMode]="itemCardMode"></app-item-card>
+  </div>
 </div>

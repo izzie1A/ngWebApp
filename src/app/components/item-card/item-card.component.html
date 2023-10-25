@@ -47,6 +47,11 @@
     <div *ngIf="itemCardMode=='viewDetail'">
 
 
+        <div class="itemCardImagePosterFrame">
+            <img [src]="item.posterImage" class="itemImageFrameImage">
+        </div>
+
+
         <div class="itemCardHeader flexAround">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">
@@ -70,16 +75,13 @@
             </div>
         </div>
 
-        <div class="itemCardImagePosterFrame">
-            <img [src]="item.posterImage" class="itemImageFrameImage">
-        </div>
     </div>
 
 
 
     <!-- edit -->
     <div *ngIf="itemCardMode=='edit'">
-        
+
         <div class="itemCardHeader flexAround">
             <a class="itemCardTitle">{{item.name}}</a>
             <div class="itemCardControlBar">

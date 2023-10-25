@@ -4,6 +4,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { Firestore, collectionData, collection, query, limit } from '@angular/fire/firestore';
 import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
 import { faker } from '@faker-js/faker';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-item-card-list',
@@ -23,22 +24,28 @@ export class ItemCardListComponent {
   user: any;
   itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'view';
 
-  constructor(private fbS: FirebaseControlService, private afs: AuthService) {
-    this.address = 'loreamCollection';
-    this.item$ = collectionData(collection(this.firestore, this.address));
+  constructor(private fbS: FirebaseControlService, private afs: AuthService, public dialog: MatDialog) {
+    this.address = 'citiesloreamCollection';
+    // this.item$ = collectionData(collection(this.firestore, this.address));
     // this.item$ = this.fbS.getCollection(this.address);
-
-    this.initialize();
 
     this.collectionArray.push(new ItemCardListItem('Home', 'loreamFolder/' + 'personalFolder/' + this.afs.getUserID()));
     this.collectionArray.push(new ItemCardListItem('Home', 'cities'));
     this.collectionArray.push(new ItemCardListItem('test', 'test'));
     this.collectionArray.push(new ItemCardListItem('loreamCollection', 'citiesloreamCollection'));
+
+    this.initialize();
   }
   async initialize() {
-    let x = await this.fbS.queryCondition("cities", 3, "name", "!=", 'true');
+    let x = await this.fbS.queryCondition(this.address, 10, "name", "!=", 'null');
     console.log(x);
     this.itemArray = x;
+  }
+
+  test() {
+
+  }
+  openDialog(): void {
   }
 
   createEmpty() {

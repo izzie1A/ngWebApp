@@ -90,7 +90,7 @@ export class FirebaseControlService {
   }
 
   async queryCondition(address: string, amountLimit: number, condton1: string, condton2: WhereFilterOp, condton3: string) {
-    const q = await query(collection(this.firestore, address), orderBy("name"), limit(3));
+    const q = await query(collection(this.firestore, address), orderBy("name"), limit(amountLimit));
     const querySnapshot = await getDocs(q);
     let result: DocumentData[] = [];
     querySnapshot.forEach((doc) => {
