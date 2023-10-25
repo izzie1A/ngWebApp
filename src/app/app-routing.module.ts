@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   { path: 'setting', component: SettingComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'firebase', component: FileControlComponent },
+  { path: 'firebase', component: ItemCardListComponent },
   { path: 'search', component: SearchPageComponent },
 ];
 

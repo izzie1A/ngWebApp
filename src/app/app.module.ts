@@ -15,6 +15,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemCardListComponent } from './components/item-card-list/item-card-list.component';
+import { ItemCardDialogComponent } from './components/item-card-dialog/item-card-dialog.component';
+
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
@@ -31,16 +33,15 @@ import { FileControlComponent } from './components/slides/file-control/file-cont
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ItemCardDetailComponent } from './components/item-card-detail/item-card-detail.component';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NotFoundComponent } from './components/slides/not-found/not-found.component';
 import { SearchPageComponent } from './components/slides/search-page/search-page.component';
 
 // angular matreial
 import {MatDialogModule} from '@angular/material/dialog';
-import { ItemCardDialogComponent } from './components/item-card-dialog/item-card-dialog.component';
 
 // import { Three } from 'three'
 @NgModule({
@@ -60,17 +61,19 @@ import { ItemCardDialogComponent } from './components/item-card-dialog/item-card
     ItemCardDetailComponent,
     NotFoundComponent,
     SearchPageComponent,
-    ItemCardDialogComponent,
   ],
+  entryComponents: [ItemCardDialogComponent],
   imports: [
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    BrowserModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatIconModule,
     AppRoutingModule,
+    BrowserModule,
     DragDropModule,
     FormsModule,
-    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

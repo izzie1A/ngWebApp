@@ -5,6 +5,9 @@ import { Firestore, collectionData, collection, query, limit } from '@angular/fi
 import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
 import { faker } from '@faker-js/faker';
 import { MatDialog } from '@angular/material/dialog';
+// import { ItemCardDialogComponent, TaskDialogResult } from './../../components/item-card-dialog/item-card-dialog.component';
+import { TaskDialogResult, TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
+
 
 @Component({
   selector: 'app-item-card-list',
@@ -26,7 +29,7 @@ export class ItemCardListComponent {
 
   constructor(private fbS: FirebaseControlService, private afs: AuthService, public dialog: MatDialog) {
     this.address = 'citiesloreamCollection';
-    // this.item$ = collectionData(collection(this.firestore, this.address));
+    // this.item$ = collectionData(collection(this.firestore, this.address));日
     // this.item$ = this.fbS.getCollection(this.address);
 
     this.collectionArray.push(new ItemCardListItem('Home', 'loreamFolder/' + 'personalFolder/' + this.afs.getUserID()));
@@ -37,15 +40,32 @@ export class ItemCardListComponent {
     this.initialize();
   }
   async initialize() {
-    let x = await this.fbS.queryCondition(this.address, 10, "name", "!=", 'null');
+    let x = await this.fbS.queryCondition(this.address, 3, "name", "!=", 'null');
     console.log(x);
     this.itemArray = x;
   }
 
   test() {
-
+    // this.newTask();
+    this.dialog.open(TaskDialogComponent);
   }
-  openDialog(): void {
+
+  newTask(): void {
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task: {},
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogResult | undefined) => {
+        if (!result) {
+          return;
+        }
+        // this.todo.push(result.task);
+        alert();
+      });
   }
 
   createEmpty() {
