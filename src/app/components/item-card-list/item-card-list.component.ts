@@ -30,7 +30,7 @@ export class ItemCardListComponent {
 
   constructor(private fbS: FirebaseControlService, private afs: AuthService, public dialog: MatDialog) {
     this.address = 'citiesloreamCollection';
-    // this.item$ = collectionData(collection(this.firestore, this.address));日
+    // this.item$ = collectionData(collection(this.firestore, this.address));
     // this.item$ = this.fbS.getCollection(this.address);
 
     this.collectionArray.push(new ItemCardListItem('Home', 'loreamFolder/' + 'personalFolder/' + this.afs.getUserID()));
@@ -41,7 +41,7 @@ export class ItemCardListComponent {
     this.initialize();
   }
   async initialize() {
-    let x = await this.fbS.queryCondition(this.address, 3, "name", "!=", 'null');
+    let x = await this.fbS.queryCondition(this.address, 100, "name", "!=", 'null');
     console.log(x);
     this.itemArray = x;
   }

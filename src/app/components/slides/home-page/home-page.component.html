@@ -1,9 +1,26 @@
 <!-- <app-item-card *ngFor="let x of item$|async" [item]="item$"></app-item-card> -->
 <router-outlet></router-outlet>
+<div [style]="'padding:5%;'">
+    <div class="itemCard">
+        <div class="itemCardHeader">
+            asd
+        </div>
+        <div class="itemCardSholder">
+            asd
+        </div>
+        <div class="itemCardBody" [style]="'padding:5%;'">
 
-<div class="homePageScroller">
-    <app-item-card-viewer *ngFor="let x of item$|async" [item]="x"></app-item-card-viewer>
+            <div *ngFor="let x of itemArray">
+                <!-- {{x}} -->
+                <app-item-card-viewer [item]="x"></app-item-card-viewer>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- <div class="homePageScroller">
+    <app-item-card-viewer *ngFor="let x of item$|async" [item]="x"></app-item-card-viewer>
+</div> -->
 
 <style>
     .homePageScroller {

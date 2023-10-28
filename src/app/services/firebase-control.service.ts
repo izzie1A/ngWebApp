@@ -59,9 +59,9 @@ export class FirebaseControlService {
 
   }
 
-  getCollections(address:string){
+  getCollections(address: string) {
     const q = query(collection(this.firestore, address));
-    
+
     return
   }
 
@@ -85,7 +85,7 @@ export class FirebaseControlService {
   }
 
   async docQueryCollection(collectionID: string, docID: string, name: string) {
-    
+
 
   }
 
@@ -125,10 +125,11 @@ export class FirebaseControlService {
     if (!input.files) return
     const files: FileList = input.files;
     let fileName = input.value.split("\\").pop();
-    let url = address + fileName;
-    console.log(address + fileName)
+    let url = address + input.value.split("\\").pop();
+    // console.log(address + fileName)
     const storage = getStorage();
-    const storageRef = ref(storage, url);
+    // const storage = getStorage();
+    const storageRef = ref( getStorage(), url);
     const uploadTask = uploadBytesResumable(storageRef, files[0]);
     uploadTask.on('state_changed',
       (snapshot) => {

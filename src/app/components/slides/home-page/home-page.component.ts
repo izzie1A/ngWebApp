@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { FirebaseControlService } from 'src/app/services/firebase-control.service'
@@ -8,10 +8,21 @@ import { FirebaseControlService } from 'src/app/services/firebase-control.servic
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-  item$: Observable<any[]>;
+  @Input() address: string = 'undefinded';
+
   firestore: Firestore = inject(Firestore);
-  
-  constructor(fbSerice: FirebaseControlService) {
-    this.item$ = collectionData(collection(this.firestore, 'loreamCollection'));
+  itemArray: any = [];
+
+
+  constructor(private fbS: FirebaseControlService) {
+    this.address = 'citiesloreamCollection';
+
+    this.initialize();
+
+  }
+  async initialize() {
+    let x = await this.fbS.queryCondition(this.address, 3, "name", "!=", 'null');
+    console.log(x);
+    this.itemArray = x;
   }
 }
